@@ -1,8 +1,9 @@
 {
   "name": "borobudur-living-monument",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "description": "BOROBUDUR \u2014 The Living Monument. Research prototype with illustrative geometry.",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/cahya-wirawan/borobudur-living-monument.git"
