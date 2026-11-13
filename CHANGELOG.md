@@ -11,6 +11,10 @@ exhibition.
 
 ## [Unreleased]
 
+### Changed
+
+- `README.md` now describes the project, its requirements and how to use it. The original build instructions for coding agents moved to `docs/SPECIFICATION_KIT.md`.
+
 ## [0.3.0] - 2026-11-13 — Milestone M2: Three Pillars
 
 ### Added

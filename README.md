@@ -1,110 +1,203 @@
-# BOROBUDUR — The Living Monument
+# Borobudur — The Living Monument
 
-**Agent-ready product and implementation specification**  
-Version: 1.0 | Prepared: 2026-11-12 | Status: planning baseline, not implemented
+[![CI](https://github.com/cahya-wirawan/borobudur-living-monument/actions/workflows/ci.yml/badge.svg)](https://github.com/cahya-wirawan/borobudur-living-monument/actions/workflows/ci.yml)
 
-> A cinematic, historically responsible, accessible educational experience combining **The Time Machine**, **Living Reliefs**, and **The Journey to Enlightenment**. The visitor transitions between aerial exploration, architectural storytelling, relief interpretation, and a symbolic ascent through Borobudur.
+An interactive, source-cited introduction to Borobudur, the 8th–9th-century Buddhist monument in Central Java, Indonesia. It runs in the browser in English and Indonesian and is built around three ideas:
 
-## 1. How to hand this project to an AI coding agent
+- **Time Machine** — compare four period views of the monument.
+- **Living Reliefs** — open relief stories from a catalog or from points on a 3D model.
+- **Journey to Enlightenment** — ascend through the three symbolic realms: _Kamadhatu_, _Rupadhatu_ and _Arupadhatu_.
 
-1. Unzip this package into an empty project directory, keeping all files.
-2. Launch Claude Code or Codex **from the project root**; they should read `AGENTS.md` (and `CLAUDE.md` for Claude).
-3. Give the agent this exact instruction:
+> **Research prototype (v0.3.0).** This is not a reviewed exhibit.
+>
+> - The 3D monument and diagrams are **illustrative geometry — not a surveyed reconstruction**. They are drawn by code; no scans, photographs or measurements are used.
+> - The relief stories are **demonstration artwork — not original panels**.
+> - Historical statements come from one official source (UNESCO) and are **unreviewed drafts**. The Indonesian text has not been reviewed by a native editor.
 
-   > Implement BOROBUDUR — The Living Monument from the repository documentation. First read `AGENTS.md`, `docs/01_PRD.md`, `docs/03_ARCHITECTURE.md`, and `docs/05_IMPLEMENTATION_PLAN.md`. Start at milestone M0, then implement the first runnable vertical slice M1. Use honest procedural placeholders until licensed assets exist; never imply a placeholder is a measured reconstruction. Follow the task IDs, run checks, report what works and what is blocked, and do not skip accessibility or source attribution. Do not ask for clarification unless an external license, credential, or irreversible decision genuinely blocks progress.
+## Features
 
-4. For an **individual scoped task**, use `docs/06_AGENT_TASKS.md` and `docs/08_AGENT_PLAYBOOK.md`.
-5. Work should remain deployable at each milestone; M1 must work without secrets, paid services, historical 3D scans, or proprietary content.
+- **Five chapters:** The Awakening, Across Centuries, Inside the Monument, Stories in Stone, The Ascent.
+- **Three ways to view:** _Guided_ (camera moves for you), _Explore_ (orbit the model yourself), _Read_ (text and diagrams only).
+- **Evidence labels everywhere:** each statement is marked _Documented fact_, _Scholarly inference_ or _Artistic illustration_, with its review status and a link to its source.
+- **Works without 3D:** if WebGL is unavailable the same content is shown with a still diagram. Read mode works without JavaScript.
+- **Accessible by design:** keyboard operable, screen-reader labels, reduced-motion support, no audio, no hover-only controls. Targets WCAG 2.2 AA.
+- **Shareable links:** the address bar always reflects the current chapter and selection, and Back/Forward work.
+- **No external services:** no accounts, API keys, analytics or third-party media. Fonts are self-hosted.
 
-**The package began as a specification and execution kit; milestones M0–M2 are now implemented as a labeled research prototype (see §8).** No licensed images or 3D monument models are bundled.
+## Requirements
 
-## 2. The experience in 30 seconds
+- [Node.js](https://nodejs.org/) 20.9 or newer (CI uses Node 22)
+- [pnpm](https://pnpm.io/) 10 (`corepack enable` will provide it)
+- For the 3D scene: a browser with WebGL. Without it the app falls back to diagrams.
+- For end-to-end tests only: Playwright's Chromium (`pnpm exec playwright install chromium`)
 
-Visitor arrives to an atmospheric introduction. A guided camera reveals Borobudur's stepped geometry. A chronology control visualizes documented states and **clearly labeled hypothetical construction scenes**. Clickable reliefs open interactive, source-backed stories. In the final chapter, the camera ascends through _Kamadhatu_, _Rupadhatu_, and _Arupadhatu_, with symbolic interpretations, a spatial floor selector, and a final summit reveal. A fully usable text-first alternative exists alongside the 3D experience.
+No environment variables or credentials are needed.
 
-## 3. Document map
-
-| File                                      | Why it exists                                                    |
-| ----------------------------------------- | ---------------------------------------------------------------- |
-| `AGENTS.md`                               | Non-negotiable coding-agent instructions and definition of done  |
-| `CLAUDE.md`                               | Claude Code entrypoint; defers to shared agent rules             |
-| `docs/00_VISION_AND_SCOPE.md`             | Vision, outcomes, constraints, prioritized phases                |
-| `docs/01_PRD.md`                          | Audience, requirements, user stories, acceptance criteria        |
-| `docs/02_EXPERIENCE_AND_DESIGN.md`        | Art direction, interactions, chapter storyboard, responsive UI   |
-| `docs/03_ARCHITECTURE.md`                 | System/component boundaries, 3D engine, data flow, types         |
-| `docs/04_CONTENT_PROVENANCE.md`           | Historical accuracy, citations, media rights, editorial workflow |
-| `docs/05_IMPLEMENTATION_PLAN.md`          | Milestones, dependencies, deliverables, stop/go gates            |
-| `docs/06_AGENT_TASKS.md`                  | Executable task breakdown with completion evidence               |
-| `docs/07_TEST_AND_ACCEPTANCE.md`          | Functional, visual, content, accessibility, performance QA       |
-| `docs/08_AGENT_PLAYBOOK.md`               | Instructions and reusable prompts for Claude Code/Codex          |
-| `docs/09_DEPLOYMENT_OPERATIONS.md`        | CI, deployment, monitoring, security, asset delivery             |
-| `docs/10_RISKS_AND_DECISIONS.md`          | Architecture decision records, trade-offs, risks                 |
-| `docs/11_CONTENT_MODEL_AND_API.md`        | Entities, TypeScript contracts, routing and state persistence    |
-| `docs/12_ACCEPTANCE_DEMO_SCRIPT.md`       | Stakeholder demo walkthrough and signoff criteria                |
-| `docs/13_VERSIONING_AND_RELEASES.md`      | Version scheme, changelog rules and the release workflow         |
-| `CHANGELOG.md`                            | What changed in each version                                     |
-| `content/content.schema.json`             | Machine-readable MVP dataset JSON Schema                         |
-| `content/example-content.json`            | Minimal clearly marked editorial/demo fixture                    |
-| `TASKS.yaml`                              | Structured milestone/task queue for harnesses                    |
-| `examples/ONE_SHOT_START_PROMPT.md`       | Ready-to-paste first agent instruction                           |
-| `examples/IMPLEMENTATION_LOG.template.md` | Consistent handoff between agent sessions                        |
-
-## 4. Suggested build
-
-- Node.js active LTS; pnpm with `corepack` (agent checks installed compatible versions).
-- Next.js App Router + React + TypeScript (strict); Tailwind CSS.
-- Three.js + `@react-three/fiber` + `@react-three/drei` with compatible package versions.
-- GSAP + ScrollTrigger; Lenis when motion is permitted; no mandatory paid plugins.
-- Zod for runtime content validation; Playwright, Vitest, React Testing Library, axe-core for QA.
-- Static content JSON/MDX initially; no database, API server, authentication, or LLM in v1.
-- glTF/GLB assets with optional Draco/meshopt geometry and KTX2 textures after rights verification.
-
-## 5. MVP finish line
-
-MVP = fully functional five-chapter narrative, working camera and mode transitions, era control, one or two demo relief hotspots/stories, three-realm ascent, sources and reconstruction labels, mobile and keyboard alternatives, tests, and deployment. Realistic monument scans and animated human scenes are **post-MVP**.
-
-## 6. First commands after implementation is generated
+## Quick start
 
 ```bash
+git clone https://github.com/cahya-wirawan/borobudur-living-monument.git
+cd borobudur-living-monument
 corepack enable
 pnpm install
 pnpm dev
-pnpm lint
-pnpm typecheck
-pnpm test
-pnpm test:e2e
-pnpm build
 ```
 
-The agent must add scripts matching these commands to `package.json`. Dependencies and install commands may change to suit current supported versions, but commands documented in this README must be kept working.
+Open <http://localhost:3000>.
 
-## 7. Authoritative starting references
-
-- UNESCO World Heritage, Borobudur Temple Compounds: https://whc.unesco.org/en/list/592/
-- UNESCO conservation decision (2025): https://whc.unesco.org/en/decisions/8798
-- W3C WCAG 2.2: https://www.w3.org/TR/WCAG22/
-- React Three Fiber: https://r3f.docs.pmnd.rs/
-- Khronos glTF specification: https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.pdf
-
-**Important:** References provide research context, not blanket permission to copy photographs, video, text, or 3D scans. Review individual license and attribution terms.
-
-## 8. Implementation status (2026-11-13)
-
-Milestones **M0**, **M1** and **M2** are implemented: a runnable research prototype, not a reviewed exhibit. See `IMPLEMENTATION_LOG.md` and `TASKS.yaml`.
+For a production build:
 
 ```bash
-pnpm install
-pnpm exec playwright install chromium   # once, for e2e
-pnpm dev                 # http://localhost:3000
-pnpm validate:content    # content + rights audit (prototype mode)
-pnpm audit:release       # same audit in release mode — currently FAILS by design (draft claims)
-pnpm lint && pnpm typecheck && pnpm test
-pnpm test:e2e            # builds, serves on :3100, runs desktop + mobile projects
-pnpm build && pnpm start
-node scripts/visual-inspect.mjs   # optional screenshot set; needs `pnpm start --port 3100`
+pnpm build
+pnpm start
 ```
 
-- Routes: `/`, `/{en|id}/experience`, `/{en|id}/read`, `/{en|id}/sources`, `/{en|id}/about`.
-- All visuals are original, procedural and labeled **"Illustrative geometry — not a surveyed reconstruction"**. `public/models/` is intentionally empty.
-- Historical statements live only in `src/content/content.json` (derived from `content/example-content.json`), each with a source and a `draft` review status.
-- Environment: none required. Optional `NEXT_PUBLIC_SITE_URL` (canonical URLs) and `RELEASE_CHANNEL=public` (enables indexing and makes the build fail on unreviewed content).
+## Using the app
+
+| Address          | What it is                                                       |
+| ---------------- | ---------------------------------------------------------------- |
+| `/`              | Landing page with both languages                                 |
+| `/en/experience` | The interactive experience (`/id/experience` for Indonesian)     |
+| `/en/read`       | The full story as text with diagrams and citations               |
+| `/en/sources`    | References, every statement with its evidence, and media rights  |
+| `/en/about`      | How the visuals were made, their limits, credits and the version |
+
+In the experience:
+
+- **Begin the journey** loads the 3D scene and plays a short opening glide, which you can skip. **Explore freely** lets you drag to orbit and scroll or pinch to zoom. **Read instead** opens the text version.
+- **Back / Next** and the numbered chapter bar move between chapters.
+- **Across Centuries:** pick an era with the buttons, the arrow buttons, or the left/right arrow keys.
+- **Inside the Monument:** select a numbered feature to highlight it, and switch between the 3D model and a diagram.
+- **Stories in Stone:** open a story from the list or from a "Story" button on the model. Escape closes it.
+- **The Ascent:** step Up or Down, or jump straight to a realm.
+- **Sources and evidence** lists what the current view claims and where it comes from.
+
+### Deep links
+
+```
+/{en|id}/experience?chapter=&era=&realm=&feature=&relief=&mode=
+```
+
+| Parameter | Values                                                                           |
+| --------- | -------------------------------------------------------------------------------- |
+| `chapter` | `awakening`, `centuries`, `architecture`, `stories`, `ascent`                    |
+| `era`     | `construction`, `nineteenth-century`, `restoration`, `present`                   |
+| `realm`   | `kamadhatu`, `rupadhatu`, `arupadhatu`                                           |
+| `feature` | `base`, `square-terraces`, `circular-platforms`, `openwork-stupas`, `main-stupa` |
+| `relief`  | `demo-panel-01`, `demo-panel-02`                                                 |
+| `mode`    | `guided`, `explore`, `read` (`read` redirects to the Read page)                  |
+
+Unknown values are ignored and fall back to safe defaults. Example: `/en/experience?chapter=ascent&realm=rupadhatu`.
+
+## Commands
+
+| Command                     | What it does                                                                         |
+| --------------------------- | ------------------------------------------------------------------------------------ |
+| `pnpm dev`                  | Development server on port 3000                                                      |
+| `pnpm build` / `pnpm start` | Production build and server (the build runs the content audit first)                 |
+| `pnpm lint`                 | ESLint                                                                               |
+| `pnpm typecheck`            | TypeScript, strict mode                                                              |
+| `pnpm test`                 | Unit and component tests (Vitest)                                                    |
+| `pnpm test:e2e`             | End-to-end tests (Playwright, desktop and mobile); builds and serves on port 3100    |
+| `pnpm format`               | Format with Prettier (`pnpm format:check` to verify only)                            |
+| `pnpm validate:content`     | Content and rights audit in prototype mode                                           |
+| `pnpm audit:release`        | The same audit in release mode. **Currently fails by design**: claims are unreviewed |
+| `pnpm version:check`        | Checks that `package.json` and `CHANGELOG.md` agree                                  |
+| `pnpm release:prepare`      | Bumps the version and cuts the changelog (see [Releases](#versioning-and-releases))  |
+
+`node scripts/visual-inspect.mjs` captures a screenshot set at desktop and mobile sizes for manual review. It needs `pnpm start --port 3100` running.
+
+## Configuration
+
+Both variables are optional.
+
+| Variable               | Purpose                                                                                                   |
+| ---------------------- | --------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Base URL for canonical and language-alternate links. Defaults to `http://localhost:3000`.                 |
+| `RELEASE_CHANNEL`      | Set to `public` to allow search indexing. This also makes the build fail while any content is unreviewed. |
+
+Without `RELEASE_CHANNEL=public`, every page asks search engines not to index it.
+
+## Content and provenance
+
+All historical statements live in one file, [`src/content/content.json`](src/content/content.json). Components never hardcode facts.
+
+- Each **claim** has text in both languages, an evidence status, a review status and at least one **source**.
+- Each **media** record names its creator, license and rights status.
+- The audit (`pnpm validate:content`) rejects broken references, documented claims without a source, non-HTTPS links, embedded markup and missing translations.
+- In release mode it also rejects unreviewed claims and third-party media without cleared rights.
+
+To change what the app says, edit that file and run `pnpm validate:content`. Do not mark a claim `reviewed` unless a qualified person has reviewed it. See [`docs/04_CONTENT_PROVENANCE.md`](docs/04_CONTENT_PROVENANCE.md).
+
+## Project structure
+
+```
+src/
+  app/            routes: landing, and /[locale]/experience, read, sources, about
+  components/     shell (layout, navigation, scene stage, source drawer) and ui
+  features/       experience state and URLs, time-machine, architecture, reliefs, ascent, read
+  scene/          procedural 3D model, camera waypoints, WebGL canvas
+  content/        content pack, schema, validation, migration
+  i18n/           English and Indonesian interface text
+  lib/            device capability checks, metadata, telemetry (no-op)
+e2e/              Playwright tests
+scripts/          content audit, release tooling, visual inspection
+docs/             product, design, architecture, provenance, test and release documents
+content/          original JSON Schema and example fixture from the specification
+```
+
+Built with Next.js (App Router), React, TypeScript, Tailwind CSS, three.js with React Three Fiber and drei, GSAP and Zod.
+
+## Project status
+
+| Milestone | Scope                                                       | Status         |
+| --------- | ----------------------------------------------------------- | -------------- |
+| M0        | Foundation                                                  | Done (v0.1.0)  |
+| M1        | Vertical slice: five chapters, 3D placeholder, Read mode    | Done (v0.2.0)  |
+| M2        | Three pillars: eras, architecture, reliefs, ascent, sources | Done (v0.3.0)  |
+| M3        | Hardening: performance, accessibility audit, deployment     | Next           |
+| M4        | Licensed 3D model and authentic relief stories              | Needs partners |
+| M5        | Reviewed public release (v1.0.0)                            | Needs review   |
+
+Before any public release, these are still open:
+
+- Human review of every historical statement and of the Indonesian text.
+- A designated contact for corrections.
+- Testing on real phones, in Firefox and Safari, and with screen readers; performance measurements.
+- The drawing spreads the 72 small stupas 32/24/16 across the three rings. That split has not been checked against a source.
+
+Task-level detail is in [`TASKS.yaml`](TASKS.yaml), session notes in [`IMPLEMENTATION_LOG.md`](IMPLEMENTATION_LOG.md), and decisions in [`docs/10_RISKS_AND_DECISIONS.md`](docs/10_RISKS_AND_DECISIONS.md).
+
+## Versioning and releases
+
+The project uses [Semantic Versioning](https://semver.org/). Each completed milestone is a minor version; `1.0.0` is reserved for the reviewed public release. Changes are recorded in [`CHANGELOG.md`](CHANGELOG.md), and the workflow is described in [`docs/13_VERSIONING_AND_RELEASES.md`](docs/13_VERSIONING_AND_RELEASES.md).
+
+## Documentation
+
+| Document                                                               | Contents                                             |
+| ---------------------------------------------------------------------- | ---------------------------------------------------- |
+| [`docs/00_VISION_AND_SCOPE.md`](docs/00_VISION_AND_SCOPE.md)           | Vision, outcomes and constraints                     |
+| [`docs/01_PRD.md`](docs/01_PRD.md)                                     | Product requirements and acceptance criteria         |
+| [`docs/02_EXPERIENCE_AND_DESIGN.md`](docs/02_EXPERIENCE_AND_DESIGN.md) | Storyboard, visual design and interaction rules      |
+| [`docs/03_ARCHITECTURE.md`](docs/03_ARCHITECTURE.md)                   | Technical architecture                               |
+| [`docs/04_CONTENT_PROVENANCE.md`](docs/04_CONTENT_PROVENANCE.md)       | Historical accuracy, citations and media rights      |
+| [`docs/05_IMPLEMENTATION_PLAN.md`](docs/05_IMPLEMENTATION_PLAN.md)     | Milestones and gates                                 |
+| [`docs/07_TEST_AND_ACCEPTANCE.md`](docs/07_TEST_AND_ACCEPTANCE.md)     | Test plan and release checklist                      |
+| [`docs/09_DEPLOYMENT_OPERATIONS.md`](docs/09_DEPLOYMENT_OPERATIONS.md) | Deployment and operations                            |
+| [`docs/11_CONTENT_MODEL_AND_API.md`](docs/11_CONTENT_MODEL_AND_API.md) | Content model and URL contract                       |
+| [`docs/SPECIFICATION_KIT.md`](docs/SPECIFICATION_KIT.md)               | The original hand-off instructions for coding agents |
+
+Contributors and coding agents should start with [`AGENTS.md`](AGENTS.md).
+
+## License and rights
+
+- **Code and original artwork:** no license has been chosen yet. Until one is added, all rights are reserved by the project owner.
+- **Typefaces:** Instrument Serif and Inter, bundled under the SIL Open Font License 1.1.
+- **Third-party media:** none is included. Images, scans or recordings of Borobudur must not be added without documented reuse rights; a public URL is not a license.
+
+## References
+
+- UNESCO World Heritage Centre, [Borobudur Temple Compounds](https://whc.unesco.org/en/list/592/) — the source for every historical statement in the app.
+- W3C, [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/).
+
+These references are research context. They do not grant permission to copy photographs, video, text or 3D scans.

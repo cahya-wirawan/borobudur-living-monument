@@ -1,6 +1,6 @@
 # AGENTS.md — Universal Coding-Agent Contract
 
-Applies to Claude Code, Codex, and all repository contributors. Read README and documentation before coding. This is a greenfield specification package; scaffold the application yourself.
+Applies to Claude Code, Codex, and all repository contributors. Read README and documentation before coding. The application is implemented through milestone M2 (see `README.md` and `TASKS.yaml`); the original hand-off instructions are kept in `docs/SPECIFICATION_KIT.md`. Inspect existing code before adding to it.
 
 ## Mission
 Deliver a beautiful, runnable, historically responsible interactive heritage web experience. Optimize for a convincing complete **vertical slice** before peripheral polish. The three product pillars are **Time Machine, Living Reliefs, Journey to Enlightenment**.
