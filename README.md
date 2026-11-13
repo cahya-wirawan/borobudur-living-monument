@@ -33,7 +33,11 @@ An interactive, source-cited introduction to Borobudur, the 8th–9th-century Bu
 
 No environment variables or credentials are needed.
 
-## Quick start
+## Run it locally
+
+There are two ways. Both end at <http://localhost:3000>.
+
+### With Node.js
 
 ```bash
 git clone https://github.com/cahya-wirawan/borobudur-living-monument.git
@@ -43,14 +47,23 @@ pnpm install
 pnpm dev
 ```
 
-Open <http://localhost:3000>.
+`pnpm dev` is the development server with live reload. For the optimized production build use `pnpm preview` (or `pnpm build` then `pnpm start`).
 
-For a production build:
+### With Docker
+
+Needs only Docker with the Compose plugin; Node.js and pnpm are not required on your machine.
 
 ```bash
-pnpm build
-pnpm start
+git clone https://github.com/cahya-wirawan/borobudur-living-monument.git
+cd borobudur-living-monument
+docker compose up --build
 ```
+
+- Stop with `Ctrl+C`, or `docker compose down` if started with `-d`.
+- Use another port: `PORT=8080 docker compose up --build`.
+- Without Compose: `docker build -t borobudur . && docker run --rm -p 3000:3000 borobudur`.
+
+The image is a production build (about 230 MB) that runs as a non-root user with no privileges, secrets or outbound network access. The build runs the content audit and fails if the content is structurally invalid.
 
 ## Using the app
 
@@ -106,6 +119,8 @@ Unknown values are ignored and fall back to safe defaults. Example: `/en/experie
 | `pnpm preview`              | Production build followed by a local server on port 3000                             |
 | `pnpm registers:generate`   | Regenerates the evidence ledger and rights register (`--check` to verify only)       |
 | `pnpm release:prepare`      | Bumps the version and cuts the changelog (see [Releases](#versioning-and-releases))  |
+
+To run the end-to-end tests against an instance that is already running (a container or a hosted preview), set its address: `E2E_BASE_URL=http://localhost:3000 pnpm test:e2e`.
 
 `node scripts/visual-inspect.mjs` captures a screenshot set at desktop and mobile sizes for manual review. It needs `pnpm start --port 3100` running.
 

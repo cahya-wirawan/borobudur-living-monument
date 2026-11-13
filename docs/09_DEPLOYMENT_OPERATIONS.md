@@ -96,3 +96,7 @@ Each release is a git tag. To roll back, redeploy the previous tag (`git checkou
 1. Owner chooses host and domain; set `NEXT_PUBLIC_SITE_URL`.
 2. Smoke-test the deployed preview: `/`, `/en/experience`, a deep link, `/id/read`, the no-WebGL fallback, and the response headers.
 3. Keep `RELEASE_CHANNEL` unset (no indexing) until the editorial, rights and accessibility gates pass; `RELEASE_CHANNEL=public` will refuse to build before then.
+
+### Container (v0.4.2)
+
+`Dockerfile` builds a self-contained production image (Next.js standalone output, Node 22 Alpine, non-root user, health check). `compose.yaml` runs it with all capabilities dropped. Verified by building the image, serving every route, checking the security headers and running 30 end-to-end tests against the container (`E2E_BASE_URL`). CI builds and smoke-tests the image on every push. Any host that runs containers can serve it; put HTTPS in front.
