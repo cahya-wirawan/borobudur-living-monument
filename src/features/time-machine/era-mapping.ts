@@ -1,4 +1,4 @@
-import type { ChapterId, EraId } from '@/content/schema';
+import type { ChapterId, EraId } from '@/content/types';
 
 /**
  * Maps an era to a *visual treatment* of the illustrative model. These are

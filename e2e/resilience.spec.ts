@@ -130,6 +130,8 @@ test.describe('viewports', () => {
   for (const viewport of [
     { width: 390, height: 844 },
     { width: 360, height: 740 },
+    // WCAG 1.4.10 Reflow: 320 CSS px wide, equivalent to 400% zoom on a 1280px display.
+    { width: 320, height: 568 },
     { width: 1440, height: 900 },
   ]) {
     test(`no horizontal overflow at ${viewport.width}×${viewport.height}`, async ({ page }) => {

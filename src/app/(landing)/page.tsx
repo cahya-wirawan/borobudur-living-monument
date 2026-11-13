@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { MonumentSchematic } from '@/components/shell/MonumentSchematic';
 import { getContent } from '@/content/loader';
-import { LOCALES } from '@/content/schema';
+import { LOCALES } from '@/content/types';
 import { getDictionary } from '@/i18n/dictionaries';
 
 /** Static entry: both languages, the entry choices and the one-line disclaimer. No 3D, no JS required. */

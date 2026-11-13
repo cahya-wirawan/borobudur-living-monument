@@ -1,4 +1,4 @@
-import type { EvidenceStatus, Locale } from '@/content/schema';
+import type { EvidenceStatus, Locale } from '@/content/types';
 import { getDictionary } from '@/i18n/dictionaries';
 
 /** Shape + text, never color alone (docs/02 §7). */

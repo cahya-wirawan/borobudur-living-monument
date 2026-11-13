@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import type { Locale } from '@/content/schema';
+import type { Locale } from '@/content/types';
 import type { ExperienceState, Mode } from '@/features/experience/controller';
 import { readHref } from '@/features/experience/url-state';
 import { getDictionary } from '@/i18n/dictionaries';

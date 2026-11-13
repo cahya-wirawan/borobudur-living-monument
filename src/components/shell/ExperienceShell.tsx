@@ -11,8 +11,8 @@ import {
   useState,
   useSyncExternalStore,
 } from 'react';
-import { selectClaims } from '@/content/loader';
-import type { ContentPack, Locale } from '@/content/schema';
+import { selectClaims } from '@/content/select';
+import type { ContentPack, Locale } from '@/content/types';
 import {
   ArchitectureExplorer,
   type ArchitectureView,
@@ -40,6 +40,7 @@ import { Timeline } from '@/features/time-machine/Timeline';
 import { format, getDictionary } from '@/i18n/dictionaries';
 import { otherLocale } from '@/i18n/locales';
 import { REDUCED_MOTION_QUERY, detectSceneQuality, prefersReducedMotion } from '@/lib/capabilities';
+import type { RenderableQuality } from '@/lib/performance';
 import { track } from '@/lib/telemetry';
 import type { WaypointKey } from '@/scene/waypoints';
 import { ChapterNav } from './ChapterNav';
@@ -169,6 +170,10 @@ export function ExperienceShell({
     setIntroPhase('off');
   }, []);
   const handleReady = useCallback(() => setSceneReady(true), []);
+  const dropQuality = useCallback(
+    (quality: RenderableQuality) => dispatch({ type: 'SET_QUALITY', quality }),
+    [],
+  );
   const handleArrive = useCallback((key: WaypointKey) => {
     setIntroPhase((phase) => (key === 'intro' && phase === 'armed' ? 'playing' : 'off'));
   }, []);
@@ -219,6 +224,7 @@ export function ExperienceShell({
       data-chapter={state.chapter}
       data-mode={state.mode}
       data-motion={state.motion}
+      data-quality={state.sceneQuality}
       data-hydrated={hydrated}
       className="bg-ink flex h-dvh flex-col text-white"
     >
@@ -304,6 +310,7 @@ export function ExperienceShell({
             onReady={handleReady}
             onArrive={handleArrive}
             onFail={failScene}
+            onQualityDrop={dropQuality}
             onSkipIntro={skipIntro}
             onHotspotActivate={openRelief}
           />

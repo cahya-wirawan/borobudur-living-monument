@@ -1,4 +1,4 @@
-import type { ChapterId, ContentPack, Locale } from '@/content/schema';
+import type { ChapterId, ContentPack, Locale } from '@/content/types';
 import { chapterAnchor } from './chapters';
 import {
   DEFAULT_LINKABLE,

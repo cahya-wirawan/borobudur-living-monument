@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { LOCALES, type Locale } from '@/content/schema';
+import { LOCALES, type Locale } from '@/content/types';
 import { getDictionary } from '@/i18n/dictionaries';
 import { IS_PUBLIC_RELEASE } from '@/i18n/locales';
 

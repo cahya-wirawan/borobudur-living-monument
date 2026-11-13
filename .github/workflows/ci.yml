@@ -15,12 +15,23 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm version:check
       - run: pnpm validate:content
+      - run: pnpm registers:generate --check
+      - run: pnpm format:check
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm build
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report
+            test-results
+          retention-days: 7
       # The release audit is expected to FAIL while claims are unreviewed drafts.
       # It is reported, not enforced, until a public release is being prepared.
       - name: Release audit (informational)

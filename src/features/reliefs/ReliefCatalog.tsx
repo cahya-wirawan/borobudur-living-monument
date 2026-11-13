@@ -1,7 +1,7 @@
 'use client';
 
-import { selectMedia } from '@/content/loader';
-import type { ContentPack, Locale } from '@/content/schema';
+import { selectMedia } from '@/content/select';
+import type { ContentPack, Locale } from '@/content/types';
 import { format, getDictionary } from '@/i18n/dictionaries';
 import { ReliefDemoArt } from './ReliefDemoArt';
 

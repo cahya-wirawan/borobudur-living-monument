@@ -25,18 +25,35 @@ export function ModalDialog({
 }) {
   const ref = useRef<HTMLDialogElement>(null);
 
+  // True from showModal() until the browser reports the dialog closed.
+  const shown = useRef(false);
+
+  // Runs after every render on purpose: `open` alone cannot tell us whether the
+  // element is really showing. If the browser closes the dialog itself and the
+  // visitor opens another before React has processed that close, `open` never
+  // turns false. `shown` stops us from re-opening a dialog the browser has just
+  // closed but not yet reported.
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
+    if (open && !dialog.open && !shown.current) {
+      dialog.showModal();
+      shown.current = true;
+    }
     if (!open && dialog.open) dialog.close();
-  }, [open]);
+  });
 
   return (
     <dialog
       ref={ref}
       aria-labelledby={labelledBy}
+      onCancel={(event) => {
+        // Escape: close through state so the element and the state never disagree.
+        event.preventDefault();
+        onClose();
+      }}
       onClose={() => {
+        shown.current = false;
         onClose();
         const active = document.activeElement;
         if (!active || active === document.body) fallbackFocus?.()?.focus();

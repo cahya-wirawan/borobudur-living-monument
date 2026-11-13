@@ -1,11 +1,17 @@
 'use client';
 
 import { Html } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
-import type { RefObject } from 'react';
-import type { Mode, MotionPolicy, SceneQuality } from '@/features/experience/controller';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { useRef, type RefObject } from 'react';
+import type { Mode, MotionPolicy } from '@/features/experience/controller';
 import type { EraTreatment } from '@/features/time-machine/era-mapping';
 import { QUALITY_SETTINGS } from '@/lib/capabilities';
+import {
+  IDLE_GAP_MS,
+  lowerQuality,
+  shouldDegrade,
+  type RenderableQuality,
+} from '@/lib/performance';
 import { CameraDirector } from './CameraDirector';
 import { MonumentPlaceholder } from './MonumentPlaceholder';
 import { reliefHotspotPosition, type SceneHighlight } from './monument-spec';
@@ -17,7 +23,7 @@ export type ExperienceCanvasProps = {
   waypointKey: WaypointKey;
   mode: Mode;
   motion: MotionPolicy;
-  quality: Exclude<SceneQuality, 'none'>;
+  quality: RenderableQuality;
   treatment: EraTreatment;
   highlight: SceneHighlight;
   /** Relief-story hotspots; rendered as real buttons into `hotspotLayer`. */
@@ -27,9 +33,35 @@ export type ExperienceCanvasProps = {
   onReady: () => void;
   onArrive: (key: WaypointKey) => void;
   onContextLost: () => void;
+  /** The device could not keep up; the shell should select this lower preset. */
+  onQualityDrop: (quality: RenderableQuality) => void;
   /** Intent only: the experience reducer decides what opening a hotspot means. */
   onHotspotActivate: (id: string) => void;
 };
+
+/** Samples frame intervals during render bursts and asks for a lower preset when they are slow. */
+function FrameWatch({
+  quality,
+  onQualityDrop,
+}: {
+  quality: RenderableQuality;
+  onQualityDrop: (quality: RenderableQuality) => void;
+}) {
+  const samples = useRef<number[]>([]);
+  useFrame((_, deltaSeconds) => {
+    const interval = deltaSeconds * 1000;
+    if (interval <= 0 || interval > IDLE_GAP_MS) return;
+    samples.current.push(interval);
+    if (!shouldDegrade(samples.current)) {
+      if (samples.current.length > 240) samples.current = [];
+      return;
+    }
+    samples.current = [];
+    const next = lowerQuality(quality);
+    if (next) onQualityDrop(next);
+  });
+  return null;
+}
 
 function Hotspots({
   hotspots,
@@ -89,6 +121,7 @@ export default function ExperienceCanvas({
   onReady,
   onArrive,
   onContextLost,
+  onQualityDrop,
   onHotspotActivate,
 }: ExperienceCanvasProps) {
   const settings = QUALITY_SETTINGS[quality];
@@ -119,6 +152,7 @@ export default function ExperienceCanvas({
         segments={settings.radialSegments}
         edges={settings.edges}
       />
+      <FrameWatch quality={quality} onQualityDrop={onQualityDrop} />
       <Hotspots hotspots={hotspots} layer={hotspotLayer} onActivate={onHotspotActivate} />
       <CameraDirector
         waypointKey={waypointKey}

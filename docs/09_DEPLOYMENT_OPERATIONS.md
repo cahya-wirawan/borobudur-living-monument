@@ -49,3 +49,50 @@ No sign-in, email collection or person-level telemetry. Optional aggregate analy
 
 ## 8. Public-release checklist
 Engineering sign-off + accessibility sign-off + historical content review + rights clearance + localization sign-off; add visible author credits and correction request contact method before public launch.
+
+## 9. Implemented state (v0.4.0)
+
+Nothing is deployed. Choosing a host and domain is an open owner decision (AGENTS.md "Stop and ask"), so task `M3-T04` is blocked on it. Everything below is implemented and verified locally and in CI.
+
+### Reproducible preview
+
+```bash
+pnpm install --frozen-lockfile
+pnpm preview            # production build, then serves on http://localhost:3000
+```
+
+The lockfile pins every dependency, the build needs no environment variables, and no network access is required after install. The same commands on a tagged commit reproduce that release.
+
+### Hosting requirements
+
+- A Node.js 20.9+ runtime that can run `next start`, or a platform with native Next.js support. `/{locale}/experience` is rendered per request so deep links arrive as correct HTML (ADR-009); every other route is static.
+- A pure static export is not possible without moving deep-link parsing to the browser.
+- HTTPS. `Strict-Transport-Security` is already sent.
+
+### Response headers (set in `next.config.ts`, checked by `e2e/security.spec.ts`)
+
+`Content-Security-Policy` (same-origin only), `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`, `Cross-Origin-Opener-Policy: same-origin`, `Permissions-Policy` (camera, microphone, geolocation, payment, usb disabled), `Strict-Transport-Security`. `X-Powered-By` is removed. See ADR-019 for the CSP trade-offs.
+
+### Caching
+
+- `/_next/static/*` files are content-hashed and served `immutable` for one year.
+- Static pages are prerendered; the experience route is not cached by default.
+- If a CDN is placed in front, do not cache `/{locale}/experience` across different query strings unless the query is part of the cache key.
+
+### Privacy and secrets
+
+No cookies, local storage, analytics, accounts or third-party requests (asserted in tests). There are no secrets; `.env.example` documents the two optional variables.
+
+### Pipeline
+
+CI (`.github/workflows/ci.yml`) runs: version check, content audit, register drift check, format check, lint, typecheck, unit tests, build, end-to-end tests. The release audit runs as information only until a public release is prepared.
+
+### Rollback
+
+Each release is a git tag. To roll back, redeploy the previous tag (`git checkout vX.Y.Z && pnpm install --frozen-lockfile && pnpm build`). Content and code are versioned together, so a rollback restores both.
+
+### Before a public deployment
+
+1. Owner chooses host and domain; set `NEXT_PUBLIC_SITE_URL`.
+2. Smoke-test the deployed preview: `/`, `/en/experience`, a deep link, `/id/read`, the no-WebGL fallback, and the response headers.
+3. Keep `RELEASE_CHANNEL` unset (no indexing) until the editorial, rights and accessibility gates pass; `RELEASE_CHANNEL=public` will refuse to build before then.

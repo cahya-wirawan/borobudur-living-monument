@@ -11,7 +11,21 @@ exhibition.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-13 — Milestone M3: engineering hardening (device, screen-reader and hosting sign-offs pending)
+
+### Added
+
+- The 3D scene lowers its own quality when a device cannot keep up, and never switches 3D off by itself.
+- A lost graphics context now falls back to the diagram with a working retry.
+- Security headers on every response, including a same-origin content security policy.
+- Automated checks for download-size budgets, security headers, privacy (no cookies or storage), page reflow at 320 px, and 20 screenshot baselines of the canvas-free rendering.
+- Generated evidence ledger and asset rights register, with a check that they match the content.
+- Performance report, accessibility audit, technical release report and deployment notes.
+- `pnpm preview`, `pnpm registers:generate` and `.env.example`.
+
 ### Changed
+
+- First-load JavaScript is 12–22 KB smaller: the content validation library no longer ships to browsers.
 
 - `README.md` now describes the project, its requirements and how to use it. The original build instructions for coding agents moved to `docs/SPECIFICATION_KIT.md`.
 
@@ -57,5 +71,6 @@ _Not tagged separately: delivered in the same initial commit as 0.2.0._
 - Validated content pack with claim, source and media-rights records, and a release audit that fails on unreviewed content.
 - Vitest, Playwright and axe test foundations and a CI workflow.
 
-[Unreleased]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/cahya-wirawan/borobudur-living-monument/releases/tag/v0.3.0

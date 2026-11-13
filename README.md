@@ -8,7 +8,7 @@ An interactive, source-cited introduction to Borobudur, the 8th–9th-century Bu
 - **Living Reliefs** — open relief stories from a catalog or from points on a 3D model.
 - **Journey to Enlightenment** — ascend through the three symbolic realms: _Kamadhatu_, _Rupadhatu_ and _Arupadhatu_.
 
-> **Research prototype (v0.3.0).** This is not a reviewed exhibit.
+> **Research prototype.** This is not a reviewed exhibit. The current version is in [`CHANGELOG.md`](CHANGELOG.md).
 >
 > - The 3D monument and diagrams are **illustrative geometry — not a surveyed reconstruction**. They are drawn by code; no scans, photographs or measurements are used.
 > - The relief stories are **demonstration artwork — not original panels**.
@@ -103,6 +103,8 @@ Unknown values are ignored and fall back to safe defaults. Example: `/en/experie
 | `pnpm validate:content`     | Content and rights audit in prototype mode                                           |
 | `pnpm audit:release`        | The same audit in release mode. **Currently fails by design**: claims are unreviewed |
 | `pnpm version:check`        | Checks that `package.json` and `CHANGELOG.md` agree                                  |
+| `pnpm preview`              | Production build followed by a local server on port 3000                             |
+| `pnpm registers:generate`   | Regenerates the evidence ledger and rights register (`--check` to verify only)       |
 | `pnpm release:prepare`      | Bumps the version and cuts the changelog (see [Releases](#versioning-and-releases))  |
 
 `node scripts/visual-inspect.mjs` captures a screenshot set at desktop and mobile sizes for manual review. It needs `pnpm start --port 3100` running.
@@ -117,6 +119,10 @@ Both variables are optional.
 | `RELEASE_CHANNEL`      | Set to `public` to allow search indexing. This also makes the build fail while any content is unreviewed. |
 
 Without `RELEASE_CHANNEL=public`, every page asks search engines not to index it.
+
+## Security and privacy
+
+The app sets no cookies, uses no browser storage, loads nothing from other sites and has no analytics. Every response carries security headers including a same-origin content security policy. Deployment notes are in [`docs/09_DEPLOYMENT_OPERATIONS.md`](docs/09_DEPLOYMENT_OPERATIONS.md).
 
 ## Content and provenance
 
@@ -150,14 +156,14 @@ Built with Next.js (App Router), React, TypeScript, Tailwind CSS, three.js with 
 
 ## Project status
 
-| Milestone | Scope                                                       | Status         |
-| --------- | ----------------------------------------------------------- | -------------- |
-| M0        | Foundation                                                  | Done (v0.1.0)  |
-| M1        | Vertical slice: five chapters, 3D placeholder, Read mode    | Done (v0.2.0)  |
-| M2        | Three pillars: eras, architecture, reliefs, ascent, sources | Done (v0.3.0)  |
-| M3        | Hardening: performance, accessibility audit, deployment     | Next           |
-| M4        | Licensed 3D model and authentic relief stories              | Needs partners |
-| M5        | Reviewed public release (v1.0.0)                            | Needs review   |
+| Milestone | Scope                                                       | Status                                                                          |
+| --------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| M0        | Foundation                                                  | Done (v0.1.0)                                                                   |
+| M1        | Vertical slice: five chapters, 3D placeholder, Read mode    | Done (v0.2.0)                                                                   |
+| M2        | Three pillars: eras, architecture, reliefs, ascent, sources | Done (v0.3.0)                                                                   |
+| M3        | Hardening: performance, accessibility audit, deployment     | Engineering done (v0.4.0); device tests, screen-reader test and hosting pending |
+| M4        | Licensed 3D model and authentic relief stories              | Needs partners                                                                  |
+| M5        | Reviewed public release (v1.0.0)                            | Needs review                                                                    |
 
 Before any public release, these are still open:
 
@@ -165,6 +171,8 @@ Before any public release, these are still open:
 - A designated contact for corrections.
 - Testing on real phones, in Firefox and Safari, and with screen readers; performance measurements.
 - The drawing spreads the 72 small stupas 32/24/16 across the three rings. That split has not been checked against a source.
+
+Reports for the current version: [release report](docs/release-report-v0.4.0.md), [performance](docs/performance-report.md), [accessibility](docs/accessibility-audit.md), [evidence ledger](docs/evidence-ledger.csv), [asset rights](docs/asset-rights-register.md).
 
 Task-level detail is in [`TASKS.yaml`](TASKS.yaml), session notes in [`IMPLEMENTATION_LOG.md`](IMPLEMENTATION_LOG.md), and decisions in [`docs/10_RISKS_AND_DECISIONS.md`](docs/10_RISKS_AND_DECISIONS.md).
 

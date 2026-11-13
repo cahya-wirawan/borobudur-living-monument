@@ -3,11 +3,12 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Component, useRef, type ReactNode } from 'react';
-import type { ContentPack, Locale } from '@/content/schema';
+import type { ContentPack, Locale } from '@/content/types';
 import type { ExperienceState } from '@/features/experience/controller';
 import { readHref } from '@/features/experience/url-state';
 import { sceneTreatment } from '@/features/time-machine/era-mapping';
 import { format, getDictionary } from '@/i18n/dictionaries';
+import type { RenderableQuality } from '@/lib/performance';
 import type { ExperienceCanvasProps, SceneHotspot } from '@/scene/ExperienceCanvas';
 import { highlightForFeature, highlightForRealm, type SceneHighlight } from '@/scene/monument-spec';
 import { waypointKeyFor, type WaypointKey } from '@/scene/waypoints';
@@ -57,6 +58,7 @@ export function SceneStage({
   onReady,
   onArrive,
   onFail,
+  onQualityDrop,
   onSkipIntro,
   onHotspotActivate,
 }: {
@@ -78,6 +80,7 @@ export function SceneStage({
   onReady: () => void;
   onArrive: (key: WaypointKey) => void;
   onFail: () => void;
+  onQualityDrop: (quality: RenderableQuality) => void;
   onSkipIntro: () => void;
   onHotspotActivate: (id: string) => void;
 }) {
@@ -164,6 +167,7 @@ export function SceneStage({
                 onReady={onReady}
                 onArrive={onArrive}
                 onContextLost={onFail}
+                onQualityDrop={onQualityDrop}
                 onHotspotActivate={onHotspotActivate}
               />
             </SceneErrorBoundary>

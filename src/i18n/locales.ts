@@ -1,4 +1,4 @@
-import { LOCALES, type Locale } from '@/content/schema';
+import { LOCALES, type Locale } from '@/content/types';
 
 export const DEFAULT_LOCALE: Locale = 'en';
 

@@ -6,7 +6,7 @@ import {
   type EraId,
   type Locale,
   type RealmId,
-} from '@/content/schema';
+} from '@/content/types';
 
 /**
  * The single deterministic experience state (ADR-003). The 3D scene, GSAP

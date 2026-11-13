@@ -1,4 +1,4 @@
-import type { ChapterId, RealmId } from '@/content/schema';
+import type { ChapterId, RealmId } from '@/content/types';
 
 /**
  * Camera waypoints are art-direction parameters for the illustrative model,

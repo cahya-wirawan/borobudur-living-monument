@@ -2,8 +2,8 @@
 
 import { ClaimList } from '@/components/shell/ClaimList';
 import { EvidenceBadge } from '@/components/shell/EvidenceBadge';
-import { selectClaims } from '@/content/loader';
-import type { ContentPack, EraId, Locale } from '@/content/schema';
+import { selectClaims } from '@/content/select';
+import type { ContentPack, EraId, Locale } from '@/content/types';
 import { format, getDictionary } from '@/i18n/dictionaries';
 
 /**

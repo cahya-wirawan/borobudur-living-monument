@@ -1,5 +1,5 @@
-import type { ContentPack, Locale } from '@/content/schema';
-import { isPrototype } from '@/content/loader';
+import type { ContentPack, Locale } from '@/content/types';
+import { isPrototype } from '@/content/select';
 import { getDictionary } from '@/i18n/dictionaries';
 
 /** Persistent while any claim is unreviewed or the geometry is illustrative. Not dismissible. */

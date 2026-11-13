@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CHAPTER_IDS, ERA_IDS, REALM_IDS } from '@/content/schema';
+import { CHAPTER_IDS, ERA_IDS, REALM_IDS } from '@/content/types';
 import { TOTAL_LEVELS, eraTreatment, sceneTreatment } from '@/features/time-machine/era-mapping';
 import { getContent } from '@/content/loader';
 import {

@@ -1,8 +1,8 @@
 'use client';
 
 import { ClaimList } from '@/components/shell/ClaimList';
-import { selectClaims } from '@/content/loader';
-import type { ContentPack, Locale } from '@/content/schema';
+import { selectClaims } from '@/content/select';
+import type { ContentPack, Locale } from '@/content/types';
 import { getDictionary } from '@/i18n/dictionaries';
 
 export type ArchitectureView = '3d' | 'diagram';
