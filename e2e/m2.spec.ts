@@ -359,6 +359,9 @@ test.describe('M2-T05 Sources and About', () => {
       page.getByText('No measurements, scans, photographs or surveyed data'),
     ).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Credits and licenses' })).toBeVisible();
+    await expect(page.getByTestId('app-version')).toHaveText(
+      /^Version \d+\.\d+\.\d+ — research prototype$/,
+    );
     const en = await page.locator('main li').count();
     await page.getByRole('link', { name: 'Switch language to Bahasa Indonesia' }).click();
     await expect(page).toHaveURL(/\/id\/about$/);

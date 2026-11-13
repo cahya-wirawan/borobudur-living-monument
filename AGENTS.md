@@ -41,7 +41,8 @@ Deliver a beautiful, runnable, historically responsible interactive heritage web
 2. State a short task plan; implement a small, reviewable unit. Respect existing work; inspect before editing.
 3. Run typecheck, lint, focused tests, and build when relevant; capture commands/outcomes. For UI work, run a browser test and check mobile + reduced-motion flows.
 4. Update `TASKS.yaml` status, `docs/10_RISKS_AND_DECISIONS.md` for real decisions, and a concise session report in `IMPLEMENTATION_LOG.md` (create if missing).
-5. Report: files changed, visible behavior, validation results, risks, what remains, and next task ID.
+5. After a completed milestone, cut a release as described in `docs/13_VERSIONING_AND_RELEASES.md` (changelog, version bump, release PR, tag).
+6. Report: files changed, visible behavior, validation results, risks, what remains, and next task ID.
 
 ## Mandatory definition of done (per feature)
 - Usable with mouse, keyboard, touch and without WebGL.
