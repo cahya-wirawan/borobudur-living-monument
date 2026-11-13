@@ -131,7 +131,7 @@ const en = {
     },
     creator: 'Creator',
     license: 'License',
-    licenseNames: { 'project-original': 'Original project work (no third-party rights)' } as Record<
+    licenseNames: { 'project-original': 'Original project work, MIT License' } as Record<
       string,
       string
     >,
@@ -244,7 +244,7 @@ const en = {
     ],
     creditsHeading: 'Credits and licenses',
     credits: [
-      'Illustrations and 3D geometry: original work by the project team, authored in this repository.',
+      'Illustrations, 3D geometry and source code: original work by the project team, released under the MIT License.',
       'Typefaces: Instrument Serif and Inter, self-hosted under the SIL Open Font License 1.1.',
       'Software: Next.js, React, three.js, React Three Fiber, drei and GSAP, used under their respective open-source or standard no-charge licenses.',
     ],
@@ -389,7 +389,7 @@ const id: Dictionary = {
     },
     creator: 'Pembuat',
     license: 'Lisensi',
-    licenseNames: { 'project-original': 'Karya asli proyek (tanpa hak pihak ketiga)' },
+    licenseNames: { 'project-original': 'Karya asli proyek, Lisensi MIT' },
     rights: 'Status hak',
     rightsOriginal: 'Karya asli yang dibuat dalam repositori ini',
     rightsReviewed: 'Karya pihak ketiga — hak telah ditinjau',
@@ -500,7 +500,7 @@ const id: Dictionary = {
     ],
     creditsHeading: 'Kredit dan lisensi',
     credits: [
-      'Ilustrasi dan geometri 3D: karya asli tim proyek, dibuat dalam repositori ini.',
+      'Ilustrasi, geometri 3D, dan kode sumber: karya asli tim proyek, dirilis di bawah Lisensi MIT.',
       'Huruf: Instrument Serif dan Inter, dihosting sendiri di bawah SIL Open Font License 1.1.',
       'Perangkat lunak: Next.js, React, three.js, React Three Fiber, drei, dan GSAP, digunakan sesuai lisensi sumber terbuka atau lisensi standar tanpa biaya masing-masing.',
     ],

@@ -199,9 +199,12 @@ Contributors and coding agents should start with [`AGENTS.md`](AGENTS.md).
 
 ## License and rights
 
-- **Code and original artwork:** no license has been chosen yet. Until one is added, all rights are reserved by the project owner.
-- **Typefaces:** Instrument Serif and Inter, bundled under the SIL Open Font License 1.1.
+- **Code, documentation and original artwork:** [MIT License](LICENSE), © 2026 Cahya Wirawan. This covers the source code, the procedural 3D geometry and the diagrams and demonstration artwork authored in this repository.
+- **Typefaces:** Instrument Serif and Inter are installed from npm under the SIL Open Font License 1.1. They are not covered by the MIT License.
+- **Cited references:** the UNESCO pages the content cites are not part of this repository and are not licensed by it.
 - **Third-party media:** none is included. Images, scans or recordings of Borobudur must not be added without documented reuse rights; a public URL is not a license.
+
+The license covers reuse of the material. It does not make the historical statements reviewed or the visuals accurate; see the prototype notice at the top.
 
 ## References
 

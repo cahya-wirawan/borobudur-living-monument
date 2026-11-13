@@ -19,8 +19,8 @@ _Generated from `src/content/content.json` by `pnpm registers:generate`. Do not 
 | `relief-demo-line-art` | illustration | artistic | Borobudur — The Living Monument project team (repository-authored) | project-original | yes | not applicable (original) | Original abstract line art authored in code by the project team. Demonstration artwork — not a specific original panel. |
 | `relief-demo-line-art-02` | illustration | artistic | Borobudur — The Living Monument project team (repository-authored) | project-original | yes | not applicable (original) | Original abstract line art authored in code by the project team. Demonstration artwork — not a specific original panel. |
 
-`project-original` means the work was authored in this repository. The repository has no
-license file yet, so all rights are reserved by the project owner until one is chosen.
+`project-original` means the work was authored in this repository. It is released under the
+MIT License (see `LICENSE`). Typefaces keep their own license, listed below.
 
 ## Typefaces
 

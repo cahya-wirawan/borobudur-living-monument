@@ -11,6 +11,16 @@ exhibition.
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-11-13 — MIT License and Vercel readiness
+
+### Added
+
+- MIT License for the code, documentation and original artwork.
+
+### Changed
+
+- Canonical and language links use the deployment's own address when hosted on Vercel.
+
 ## [0.4.0] - 2026-11-13 — Milestone M3: engineering hardening (device, screen-reader and hosting sign-offs pending)
 
 ### Added
@@ -71,6 +81,7 @@ _Not tagged separately: delivered in the same initial commit as 0.2.0._
 - Validated content pack with claim, source and media-rights records, and a release audit that fails on unreviewed content.
 - Vitest, Playwright and axe test foundations and a CI workflow.
 
-[Unreleased]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/cahya-wirawan/borobudur-living-monument/releases/tag/v0.3.0
