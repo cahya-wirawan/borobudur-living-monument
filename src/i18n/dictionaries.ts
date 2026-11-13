@@ -249,6 +249,7 @@ const en = {
       'Software: Next.js, React, three.js, React Three Fiber, drei and GSAP, used under their respective open-source or standard no-charge licenses.',
     ],
     legendHeading: 'Evidence labels',
+    version: 'Version {version} — research prototype',
   },
   landing: {
     heading: 'Borobudur',
@@ -504,6 +505,7 @@ const id: Dictionary = {
       'Perangkat lunak: Next.js, React, three.js, React Three Fiber, drei, dan GSAP, digunakan sesuai lisensi sumber terbuka atau lisensi standar tanpa biaya masing-masing.',
     ],
     legendHeading: 'Label bukti',
+    version: 'Versi {version} — prototipe riset',
   },
   landing: {
     heading: 'Borobudur',

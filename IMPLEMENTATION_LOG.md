@@ -39,3 +39,11 @@ Add one entry per agent session, newest at bottom. Keep notes factual, max ~300 
 - **Truth-status and rights:** no new historical claims; features reuse existing UNESCO-sourced claims. Relief entries are demonstrations with no location (ADR-017). One new original illustration registered in the media list.
 - **Known issues and blockers:** unchanged from session 1 (no real devices, other browsers, screen readers or performance measurements; CI never run; claims and Indonesian copy unreviewed; no correction contact; 32/24/16 stupa split unverified). The optional "exploded" architecture schematic and scroll-driven progress were not built.
 - **Next task:** `M3-T01` (Scene performance).
+
+## 2026-11-13 — Session 3
+
+- **Task IDs:** none (process work requested by the owner): semantic versioning, changelog and release workflow.
+- **Files changed:** `CHANGELOG.md`, `docs/13_VERSIONING_AND_RELEASES.md`, `scripts/release*.ts`, `scripts/check-version.ts`, `package.json` (0.3.0), CI workflow, About page version line, `CLAUDE.md`/`AGENTS.md` workflow notes.
+- **Commands and results:** `pnpm version:check` OK; `pnpm lint`, `pnpm typecheck`, `pnpm format:check` clean; `pnpm test` 87 passed; `pnpm test:e2e` 88 passed.
+- **Release:** v0.3.0 (Milestone M2) via `release/v0.3.0` → pull request → `main`, then tag.
+- **Next task:** `M3-T01` (Scene performance); it will ship as v0.4.0 with the rest of M3.

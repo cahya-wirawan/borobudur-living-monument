@@ -41,6 +41,8 @@ Visitor arrives to an atmospheric introduction. A guided camera reveals Borobudu
 | `docs/10_RISKS_AND_DECISIONS.md`          | Architecture decision records, trade-offs, risks                 |
 | `docs/11_CONTENT_MODEL_AND_API.md`        | Entities, TypeScript contracts, routing and state persistence    |
 | `docs/12_ACCEPTANCE_DEMO_SCRIPT.md`       | Stakeholder demo walkthrough and signoff criteria                |
+| `docs/13_VERSIONING_AND_RELEASES.md`      | Version scheme, changelog rules and the release workflow         |
+| `CHANGELOG.md`                            | What changed in each version                                     |
 | `content/content.schema.json`             | Machine-readable MVP dataset JSON Schema                         |
 | `content/example-content.json`            | Minimal clearly marked editorial/demo fixture                    |
 | `TASKS.yaml`                              | Structured milestone/task queue for harnesses                    |

@@ -3,9 +3,10 @@ import { notFound } from 'next/navigation';
 import { EvidenceLegend } from '@/components/shell/EvidenceBadge';
 import { StaticPage } from '@/components/shell/StaticPage';
 import { getContent } from '@/content/loader';
-import { getDictionary } from '@/i18n/dictionaries';
+import { format, getDictionary } from '@/i18n/dictionaries';
 import { isLocale } from '@/i18n/locales';
 import { pageMetadata } from '@/lib/metadata';
+import pkg from '../../../../package.json';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -50,6 +51,9 @@ export default async function AboutPage({ params }: Props) {
           </h2>
           <EvidenceLegend locale={locale} tone="paper" />
         </section>
+        <p data-testid="app-version" className="text-ink/75 text-sm">
+          {format(t.version, { version: pkg.version })}
+        </p>
       </div>
     </StaticPage>
   );

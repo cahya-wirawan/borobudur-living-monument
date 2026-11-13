@@ -1,8 +1,12 @@
 {
   "name": "borobudur-living-monument",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "BOROBUDUR — The Living Monument. Research prototype with illustrative geometry.",
+  "description": "BOROBUDUR \u2014 The Living Monument. Research prototype with illustrative geometry.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cahya-wirawan/borobudur-living-monument.git"
+  },
   "packageManager": "pnpm@10.0.0",
   "engines": {
     "node": ">=20.9"
@@ -20,7 +24,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "validate:content": "tsx scripts/validate-content.ts",
-    "audit:release": "tsx scripts/validate-content.ts --release"
+    "audit:release": "tsx scripts/validate-content.ts --release",
+    "version:check": "tsx scripts/check-version.ts",
+    "release:prepare": "tsx scripts/release.ts"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
