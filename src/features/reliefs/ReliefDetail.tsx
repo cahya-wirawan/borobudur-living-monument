@@ -3,8 +3,8 @@
 import { ClaimList } from '@/components/shell/ClaimList';
 import { MediaRecords } from '@/components/shell/SourceDrawer';
 import { ModalDialog } from '@/components/ui/ModalDialog';
-import { selectClaims, selectMedia } from '@/content/loader';
-import type { ContentPack, Locale } from '@/content/schema';
+import { selectClaims, selectMedia } from '@/content/select';
+import type { ContentPack, Locale } from '@/content/types';
 import { format, getDictionary } from '@/i18n/dictionaries';
 import { ReliefDemoArt } from './ReliefDemoArt';
 

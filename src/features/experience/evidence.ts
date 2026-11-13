@@ -1,5 +1,5 @@
-import { selectClaims, selectMedia, selectSources } from '@/content/loader';
-import type { Claim, ContentPack, Media, Source } from '@/content/schema';
+import { selectClaims, selectMedia, selectSources } from '@/content/select';
+import type { Claim, ContentPack, Media, Source } from '@/content/types';
 import type { ExperienceState } from './controller';
 
 export type ViewEvidence = { claims: Claim[]; sources: Source[]; media: Media[] };

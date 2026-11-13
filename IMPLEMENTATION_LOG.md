@@ -47,3 +47,14 @@ Add one entry per agent session, newest at bottom. Keep notes factual, max ~300 
 - **Commands and results:** `pnpm version:check` OK; `pnpm lint`, `pnpm typecheck`, `pnpm format:check` clean; `pnpm test` 87 passed; `pnpm test:e2e` 88 passed.
 - **Release:** v0.3.0 (Milestone M2) via `release/v0.3.0` → pull request → `main`, then tag.
 - **Next task:** `M3-T01` (Scene performance); it will ship as v0.4.0 with the rest of M3.
+
+## 2026-11-13 — Session 4
+
+- **Task IDs:** M3-T03, M3-T05 done. M3-T01, M3-T02, M3-T04 blocked on human evidence or an owner decision (ADR-023), engineering parts complete. Also: README rewritten as a project description; the original moved to `docs/SPECIFICATION_KIT.md`.
+- **Files changed:** `src/lib/performance.ts`, scene canvas (frame watch), content module split (`ids.ts`, `types.ts`, `select.ts`), `next.config.ts` (headers), `e2e/{performance,security,visual}.spec.ts` + baselines, `scripts/{measure-performance,generate-registers,registers-lib}`, reports under `docs/`.
+- **Commands and results:** `pnpm lint`, `typecheck`, `format:check`, `version:check`, `registers:generate --check` clean; `pnpm test` 95 passed; `pnpm build` ok; `pnpm test:e2e` 124 passed, 14 skipped by design; `pnpm audit:release` exit 1 (expected).
+- **Measurements (headless lab, software WebGL):** initial JS 144–183 KB (budget 250), 3D chunk 280 KB (budget 3 MB), throttled LCP 0.6–1.2 s. No real-device numbers.
+- **Found and fixed:** validation library shipped to browsers (found through a CSP violation); e2e timing flakes under 7 parallel software-rendered browsers (workers capped).
+- **Manual checks:** screenshot set reviewed after changes; no console errors, external requests or overflow.
+- **Known issues and blockers:** see `docs/release-report-v0.4.0.md` section 5.
+- **Next task:** unblock `M3-T01`/`M3-T02`/`M3-T04` with the owner; otherwise `M4-T01` needs partner assets and cannot start.

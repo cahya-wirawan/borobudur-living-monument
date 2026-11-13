@@ -223,6 +223,8 @@ test.describe('M2-T03 Living Reliefs', () => {
       'demo-panel-02',
     );
     await page.keyboard.press('Escape');
+    // The page behind a modal is inert until it has closed; wait before focusing into it.
+    await expect(page.getByRole('dialog')).toHaveCount(0);
 
     const hotspot = page.locator('[data-hotspot="demo-panel-01"]');
     await hotspot.focus();

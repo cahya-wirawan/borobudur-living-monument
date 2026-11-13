@@ -1,4 +1,4 @@
-import type { RealmId } from '@/content/schema';
+import type { RealmId } from '@/content/types';
 
 /**
  * ILLUSTRATIVE GEOMETRY — NOT A SURVEYED RECONSTRUCTION.

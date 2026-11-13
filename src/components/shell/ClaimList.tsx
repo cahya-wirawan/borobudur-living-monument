@@ -1,5 +1,5 @@
-import type { Claim, ContentPack, Locale } from '@/content/schema';
-import { selectSources } from '@/content/loader';
+import type { Claim, ContentPack, Locale } from '@/content/types';
+import { selectSources } from '@/content/select';
 import { format, getDictionary } from '@/i18n/dictionaries';
 import { EvidenceBadge } from './EvidenceBadge';
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CHAPTER_IDS, ERA_IDS, REALM_IDS } from '@/content/schema';
+import { CHAPTER_IDS, ERA_IDS, REALM_IDS } from '@/content/types';
 import { DEFAULT_LINKABLE, type LinkableState } from './controller';
 import { experienceHref, parseLinkableState, readHref, serializeLinkableState } from './url-state';
 

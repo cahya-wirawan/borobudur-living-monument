@@ -79,6 +79,28 @@
 **Choice:** when the experience mounts while the browser is already on its route (e.g. Back from Read mode), it reads its selection from the URL instead of the route's cached initial props.  
 **Reason:** found by e2e: the cached props silently dropped the selected era. Forward navigations still use server props because the address bar updates only after mount.
 
+### ADR-019 — Content Security Policy (2026-11-13)
+**Choice:** a same-origin CSP on every response: no remote scripts, styles, fonts, frames or connections; `object-src 'none'`, `frame-ancestors 'none'`. `script-src` and `style-src` keep `'unsafe-inline'`; `'unsafe-eval'` is allowed in development only.  
+**Reason:** statically prerendered Next.js pages bootstrap with inline scripts that cannot carry a per-request nonce, and the 3D overlay sets inline styles. A nonce-based policy would force every page to render per request.  
+**Residual risk:** inline script injection is not blocked by the policy. It is mitigated by never rendering raw HTML (`dangerouslySetInnerHTML` is not used) and by rejecting markup in content at build time.  
+**Review:** move to nonces or hashes if user-supplied content or third-party scripts are ever introduced.
+
+### ADR-020 — Runtime quality adaptation (2026-11-13)
+**Choice:** sample frame intervals while the scene is moving; a median under 24 FPS over 45 frames lowers the preset one step. Never raise it again during a visit and never switch 3D off automatically.  
+**Reason:** one-way steps cannot oscillate; turning 3D off is left to real failures or the visitor. Thresholds are engineering guesses until real-device measurements exist.
+
+### ADR-021 — Visual regression covers canvas-free rendering only (2026-11-13)
+**Choice:** screenshot baselines are taken with WebGL blocked (HTML and SVG). The 3D canvas is covered by functional tests, not pixels.  
+**Reason:** GPU and driver differences make canvas pixels unstable across machines; the canvas-free view is deterministic and is also what low-end visitors see.
+
+### ADR-022 — Validation library stays out of the browser (2026-11-13)
+**Choice:** browser code imports identifiers and types from `src/content/types.ts` and lookups from `src/content/select.ts`; Zod schemas and the audit run only on the server and in scripts.  
+**Reason:** found via a CSP violation report: the library probes `eval` and added about 12–22 KB to first load for no visitor benefit.
+
+### ADR-023 — M3 tasks that need people or an owner decision are marked blocked, not done (2026-11-13)
+**Choice:** `M3-T01` (real-device measurements), `M3-T02` (manual screen-reader pass) and `M3-T04` (hosted preview) are `blocked` with their engineering evidence listed. Dependent engineering work (`M3-T03`, `M3-T05`) proceeded because it does not rely on the missing evidence. v0.4.0 is labelled "M3 engineering hardening".  
+**Reason:** a coding agent cannot hold a phone, listen to a screen reader or choose a public host; claiming those would be false completeness.
+
 ## Risk register
 
 | ID | Risk | Likelihood/Impact | Mitigation | Trigger / owner |

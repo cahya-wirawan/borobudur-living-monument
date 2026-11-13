@@ -1,4 +1,4 @@
-import { CHAPTER_IDS, type ChapterId } from '@/content/schema';
+import { CHAPTER_IDS, type ChapterId } from '@/content/types';
 
 export const CHAPTER_ORDER: readonly ChapterId[] = CHAPTER_IDS;
 

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
-import { LOCALES } from '@/content/schema';
+import { LOCALES } from '@/content/types';
 import { SITE_URL, isLocale } from '@/i18n/locales';
 import '../fonts';
 import '../globals.css';

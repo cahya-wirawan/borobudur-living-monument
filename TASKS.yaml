@@ -1,7 +1,7 @@
 version: '1.0'
 project: Borobudur — The Living Monument
 updated: '2026-11-13'
-status: m2_three_pillars_prototype
+status: m3_engineering_hardening_prototype
 allowed_statuses:
 - todo
 - in_progress
@@ -188,7 +188,7 @@ tasks:
 - id: M3-T01
   title: Scene performance
   milestone: M3
-  status: todo
+  status: blocked
   depends_on:
   - M2-T01
   - M2-T03
@@ -196,48 +196,61 @@ tasks:
   acceptance:
   - Lazy scene loading, quality adaptation, GPU cleanup and performance report
   - Real device/browser measurements logged, budgets compared explicitly
-  evidence: []
+  evidence:
+  - "Engineering done: lazy scene loading, on-demand rendering, runtime quality adaptation (src/lib/performance.ts), context release and context-loss recovery; e2e/performance.spec.ts enforces byte budgets"
+  - "docs/performance-report.md: initial JS 144-183 KB vs 250 KB budget, 3D package 280 KB vs 3 MB; lab LCP 0.6-1.2 s. Headless software rendering only"
+  blocked_on: "Real-device FPS/LCP measurements (desktop GPU, mid-range Android, iPhone) — needs a person with the devices; procedure in docs/performance-report.md section 7"
 - id: M3-T02
   title: Accessibility and language validation
   milestone: M3
-  status: todo
+  status: blocked
   depends_on:
   - M2-T05
   acceptance:
   - WCAG audit, keyboard paths, reduced-motion, EN/ID parity
   - No critical blockers; manual screen reader observations documented
-  evidence: []
+  evidence:
+  - "Automated: axe WCAG 2.2 AA + best-practice with 0 violations on all routes, chapters and dialogs; scripted keyboard, focus, reflow at 320px, reduced motion, target size, language parity"
+  - "docs/accessibility-audit.md lists coverage, known gaps and the manual script"
+  blocked_on: "Manual screen-reader observations (NVDA/VoiceOver/TalkBack) and Firefox/Safari checks — needs a human tester; script in docs/accessibility-audit.md section 5"
 - id: M3-T03
   title: E2E and visual regression suite
   milestone: M3
-  status: todo
+  status: done
   depends_on:
   - M3-T01
   - M3-T02
   acceptance:
   - CI-stable core paths, screenshots and fallback scenarios
   - Tests pass on specified local and CI environments
-  evidence: []
+  evidence:
+  - "138 Playwright tests across desktop and mobile profiles (124 run, 14 desktop-only skipped on mobile): journeys, deep links, locale, fallback, reduced motion, no-JS, budgets, security headers"
+  - "e2e/visual.spec.ts: 20 screenshot baselines of the canvas-free rendering; update process documented in the spec header; suite runs with no external network"
 - id: M3-T04
   title: Deployment and security
   milestone: M3
-  status: todo
+  status: blocked
   depends_on:
   - M3-T03
   acceptance:
   - Static preview deployment, CSP/headers review, cache strategy
   - No exposed secrets or forced analytics; preview is reproducible
-  evidence: []
+  evidence:
+  - "Security headers and same-origin CSP (next.config.ts, ADR-019) verified by e2e/security.spec.ts incl. zero CSP violations during a full 3D journey; immutable asset caching; no cookies, storage, analytics or secrets"
+  - "Reproducible local production preview via 'pnpm preview'; hosting requirements, cache notes and rollback documented in docs/09 section 9"
+  blocked_on: "Hosted preview deployment — host and domain are an open owner decision (AGENTS.md stop-and-ask)"
 - id: M3-T05
   title: Final MVP audit
   milestone: M3
-  status: todo
+  status: done
   depends_on:
   - M3-T04
   acceptance:
   - Evidence ledger, asset rights register, technical release report
   - P0 requirements checked; editorial gaps explicitly labeled prototype
-  evidence: []
+  evidence:
+  - "docs/evidence-ledger.csv and docs/asset-rights-register.md generated from content with a CI drift check; docs/release-report-v0.4.0.md with P0 and release checklists"
+  - "Every editorial gap is labelled; 'pnpm audit:release' fails by design while claims are drafts"
 - id: M4-T01
   title: Authentic 3D source and license audit
   milestone: M4

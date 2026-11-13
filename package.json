@@ -1,6 +1,6 @@
 {
   "name": "borobudur-living-monument",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "BOROBUDUR \u2014 The Living Monument. Research prototype with illustrative geometry.",
   "repository": {
@@ -26,7 +26,9 @@
     "validate:content": "tsx scripts/validate-content.ts",
     "audit:release": "tsx scripts/validate-content.ts --release",
     "version:check": "tsx scripts/check-version.ts",
-    "release:prepare": "tsx scripts/release.ts"
+    "release:prepare": "tsx scripts/release.ts",
+    "registers:generate": "tsx scripts/generate-registers.ts",
+    "preview": "pnpm build && next start"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

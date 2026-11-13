@@ -1,6 +1,6 @@
 'use client';
 
-import type { ChapterId, ContentPack, Locale } from '@/content/schema';
+import type { ChapterId, ContentPack, Locale } from '@/content/types';
 import {
   CHAPTER_ORDER,
   chapterIndex,

@@ -1,4 +1,4 @@
-import type { ChapterId, EvidenceStatus, Locale, ReviewStatus } from '@/content/schema';
+import type { ChapterId, EvidenceStatus, Locale, ReviewStatus } from '@/content/types';
 
 /**
  * Interface strings only. Historical statements never live here: they come

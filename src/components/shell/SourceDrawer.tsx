@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import type { ContentPack, Locale } from '@/content/schema';
+import type { ContentPack, Locale } from '@/content/types';
 import type { ViewEvidence } from '@/features/experience/evidence';
 import { format, getDictionary } from '@/i18n/dictionaries';
 import { ModalDialog } from '@/components/ui/ModalDialog';

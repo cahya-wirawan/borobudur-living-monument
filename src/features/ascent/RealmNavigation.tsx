@@ -1,7 +1,7 @@
 'use client';
 
 import { MonumentSchematic } from '@/components/shell/MonumentSchematic';
-import type { ContentPack, Locale, RealmId } from '@/content/schema';
+import type { ContentPack, Locale, RealmId } from '@/content/types';
 import { format, getDictionary } from '@/i18n/dictionaries';
 import { highlightForRealm } from '@/scene/monument-spec';
 

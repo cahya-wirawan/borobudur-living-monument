@@ -13,7 +13,9 @@ The application version lives in `package.json` and follows Semantic Versioning 
 | After 1.0.0: new backward-compatible capability | MINOR | |
 | After 1.0.0: backward-compatible fix | PATCH | |
 
-Milestone map so far: M0 = `0.1.0`, M1 = `0.2.0`, M2 = `0.3.0`. Planned: M3 = `0.4.0`, M4 = `0.5.0`, M5 = `1.0.0`.
+Milestone map so far: M0 = `0.1.0`, M1 = `0.2.0`, M2 = `0.3.0`, M3 engineering = `0.4.0`. Planned: M4 = `0.5.0`, M5 = `1.0.0`.
+
+When a milestone's engineering is finished but some tasks wait on people or owner decisions, release the engineering as the MINOR version, say so in the changelog heading, and add the remaining evidence later as PATCH releases.
 
 Rules:
 

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ClaimList } from '@/components/shell/ClaimList';
-import { selectClaims } from '@/content/loader';
-import type { ContentPack, Locale } from '@/content/schema';
+import { selectClaims } from '@/content/select';
+import type { ContentPack, Locale } from '@/content/types';
 import { readHref } from '@/features/experience/url-state';
 import { getDictionary } from '@/i18n/dictionaries';
 

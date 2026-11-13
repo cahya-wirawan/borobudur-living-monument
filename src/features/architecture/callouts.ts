@@ -1,5 +1,5 @@
 import type { SchematicCallout } from '@/components/shell/MonumentSchematic';
-import type { ContentPack } from '@/content/schema';
+import type { ContentPack } from '@/content/types';
 import { highlightForFeature } from '@/scene/monument-spec';
 
 /** Numbered diagram markers for the architectural features, in content order. */

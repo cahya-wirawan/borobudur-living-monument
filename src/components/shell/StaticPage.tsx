@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import type { ContentPack, Locale } from '@/content/schema';
+import type { ContentPack, Locale } from '@/content/types';
 import { format, getDictionary } from '@/i18n/dictionaries';
 import { otherLocale } from '@/i18n/locales';
 import { PrototypeBanner } from './PrototypeBanner';

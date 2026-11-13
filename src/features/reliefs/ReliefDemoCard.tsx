@@ -1,5 +1,5 @@
-import { selectMedia } from '@/content/loader';
-import type { ContentPack, Locale, Relief } from '@/content/schema';
+import { selectMedia } from '@/content/select';
+import type { ContentPack, Locale, Relief } from '@/content/types';
 import { getDictionary } from '@/i18n/dictionaries';
 import { ReliefDemoArt } from './ReliefDemoArt';
 
