@@ -1,0 +1,12 @@
+.next
+node_modules
+pnpm-lock.yaml
+playwright-report
+test-results
+BOROBUDUR_MASTER_SPEC.md
+docs
+examples
+content
+AGENTS.md
+CLAUDE.md
+TASKS.yaml

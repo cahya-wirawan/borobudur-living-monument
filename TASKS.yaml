@@ -1,0 +1,281 @@
+version: '1.0'
+project: Borobudur — The Living Monument
+updated: '2026-11-13'
+status: m2_three_pillars_prototype
+allowed_statuses:
+- todo
+- in_progress
+- blocked
+- done
+task_policy: Tasks may be marked done only after implementation plus evidence. Do not assume documentation is code.
+tasks:
+- id: M0-T01
+  title: Scaffold and quality scripts
+  milestone: M0
+  status: done
+  depends_on: []
+  acceptance:
+  - Next.js App Router, strict TypeScript, Tailwind, pnpm and all specified package scripts
+  - Build, typecheck and lint complete successfully
+  evidence:
+  - "2026-11-13: Next.js 16.4 App Router, React 19, TypeScript 6 strict, Tailwind 4, pnpm lockfile; scripts dev/build/lint/typecheck/test/test:e2e/format"
+  - "pnpm build, pnpm typecheck, pnpm lint all exit 0"
+- id: M0-T02
+  title: Design system, routes and i18n
+  milestone: M0
+  status: done
+  depends_on:
+  - M0-T01
+  acceptance:
+  - Responsive shell, design tokens, English/Indonesian routes
+  - No horizontal overflow at 1440x900 and 390x844; mode switch visible
+  evidence:
+  - "src/styles/tokens.css, src/i18n/dictionaries.ts, /en and /id routes, mode switcher in header"
+  - "e2e/resilience.spec.ts 'no horizontal overflow' at 1440x900, 390x844, 360x740; e2e/navigation.spec.ts language switch"
+- id: M0-T03
+  title: Verified content types and validation
+  milestone: M0
+  status: done
+  depends_on:
+  - M0-T01
+  acceptance:
+  - Content loader and schema validation
+  - Missing sources and unlicensed media fail release audit
+  evidence:
+  - "src/content/{schema,validate,loader}.ts, scripts/validate-content.ts"
+  - "src/content/validate.test.ts: missing source fails, unknown third-party license blocks release; pnpm audit:release exits 1 on current draft content (expected)"
+- id: M0-T04
+  title: Automated test foundation
+  milestone: M0
+  status: done
+  depends_on:
+  - M0-T01
+  - M0-T02
+  acceptance:
+  - Vitest, Playwright, baseline accessibility and CI checks
+  - Example unit, e2e and no-WebGL tests pass
+  evidence:
+  - "Vitest 59 tests, Playwright 60 tests (desktop + mobile projects), axe in both"
+  - "e2e/resilience.spec.ts 'WebGL unavailable'; .github/workflows/ci.yml written but NOT yet executed (no git remote)"
+- id: M1-T01
+  title: Experience state machine and deep links
+  milestone: M1
+  status: done
+  depends_on:
+  - M0-T02
+  - M0-T03
+  acceptance:
+  - Typed reducer, five chapters, read/3D modes, URL parser and serializer
+  - Navigation, locale persistence, reload, back and forward covered by tests
+  evidence:
+  - "src/features/experience/{controller,url-state}.ts with unit tests"
+  - "e2e/navigation.spec.ts: deep link, reload, back/forward, invalid params, locale persistence"
+- id: M1-T02
+  title: Schematic 3D monument
+  milestone: M1
+  status: done
+  depends_on:
+  - M0-T02
+  - M1-T01
+  acceptance:
+  - Self-authored procedural 3D model with persistent illustrative label
+  - Desktop and mobile scene can be navigated; WebGL failures show accessible fallback
+  evidence:
+  - "src/scene/MonumentPlaceholder.tsx (procedural), persistent illustrative label, quality gating in src/lib/capabilities.ts"
+  - "Browser-verified in headless Chromium (software WebGL) at 1440x900 and 390x844; fallback covered by e2e. NOT yet verified on a physical phone/GPU"
+- id: M1-T03
+  title: Camera director and cinematic hero
+  milestone: M1
+  status: done
+  depends_on:
+  - M1-T02
+  acceptance:
+  - Waypoint registry, GSAP transition cleanup, skippable intro
+  - Reduced motion, skip, unmount and reconnect leave stable state
+  evidence:
+  - "src/scene/{waypoints,CameraDirector}.tsx, GSAP tween killed on change/unmount, skippable intro"
+  - "e2e/journey.spec.ts skip + self-ending intro; e2e/resilience.spec.ts reduced motion"
+- id: M1-T04
+  title: Five-chapter Read mode
+  milestone: M1
+  status: done
+  depends_on:
+  - M1-T01
+  - M0-T03
+  acceptance:
+  - Complete semantic text-first chapter route and educational descriptions
+  - No-WebGL and keyboard users reach all five chapters and source links
+  evidence:
+  - "src/features/read/ReadExperience.tsx at /{locale}/read, same content records as the experience"
+  - "e2e/resilience.spec.ts 'without JavaScript'; axe clean on /en/read and /id/read"
+- id: M1-T05
+  title: Responsive and resilience pass
+  milestone: M1
+  status: done
+  depends_on:
+  - M1-T03
+  - M1-T04
+  acceptance:
+  - Mobile touch controls, visible loading/failure states, source drawer
+  - Playwright coverage for low-motion, small viewport and failed canvas
+  evidence:
+  - "Loading/cancel/failure/retry states in src/components/shell/SceneStage.tsx; SourceDrawer (native dialog)"
+  - "e2e: slow network, failed canvas, reduced motion, small viewports, touch-target size, drawer focus restore"
+- id: M2-T01
+  title: Time Machine
+  milestone: M2
+  status: done
+  depends_on:
+  - M1-T05
+  acceptance:
+  - Four eras, evidence labels, accessible selector and synchronized illustrative changes
+  - Each era selectable by keyboard; deep links and Read parallel work
+  evidence:
+  - "src/features/time-machine/Timeline.tsx: four eras, buttons + previous/next + arrow keys, separate 'source says' (documented) and 'picture shows' (artistic) labels, fade veil between drawing styles"
+  - "e2e/m2.spec.ts 'M2-T01 Time Machine' (deep link per era, keyboard, history, mode continuity); Read parallel at /read#era-*; screenshots reviewed for all four eras"
+- id: M2-T02
+  title: Architecture overlays
+  milestone: M2
+  status: done
+  depends_on:
+  - M1-T05
+  acceptance:
+  - Three or more accessible feature annotations and SVG diagram
+  - Accessible feature list has source-backed descriptions independent of hover
+  evidence:
+  - "Content schema 1.1.0 'features' (5 records, each citing a claim); ArchitectureExplorer numbered list, 3D/Diagram toggle, SVG callouts, ?feature= deep link"
+  - "e2e/m2.spec.ts 'M2-T02 Architecture overlays' incl. no-canvas path; component test with axe"
+- id: M2-T03
+  title: Living Reliefs
+  milestone: M2
+  status: done
+  depends_on:
+  - M1-T05
+  - M0-T03
+  acceptance:
+  - One or two demo relief stories, hotspot navigation, dialog, focus handling and sources
+  - No false ancient panel attribution; Escape closes and restores focus; deep link works
+  evidence:
+  - "ReliefCatalog + ReliefDetail (native modal dialog) + focusable 3D hotspots; two entries, both demonstration, no location claimed"
+  - "e2e/m2.spec.ts 'M2-T03 Living Reliefs': demo labels, Escape + focus restore, focus containment, previous/next, hotspot opens same record, ?relief= deep link in ID, axe on dialog"
+- id: M2-T04
+  title: Journey to Enlightenment
+  milestone: M2
+  status: done
+  depends_on:
+  - M1-T05
+  - M0-T03
+  acceptance:
+  - Three-realm selector, ascent transitions, localized cards and recap
+  - Architectural realm mapping is correct; no-source claims blocked
+  evidence:
+  - "RealmNavigation with Up/Down steps, direct selection, zone diagram, realm-tinted backdrop, sourced Recap"
+  - "e2e/m2.spec.ts 'M2-T04': zone mapping base=1 / square=5 / circular+stupa=4 levels asserted; validator rejects realms, eras or features with no claim ('unsourced-record')"
+- id: M2-T05
+  title: Sources and About
+  milestone: M2
+  status: done
+  depends_on:
+  - M2-T01
+  - M2-T03
+  - M2-T04
+  acceptance:
+  - Source index, interpretation method, credits and locale parity
+  - Rights gate rejects unknown media; accessible citation links work
+  evidence:
+  - "/{locale}/sources (references with supported statements, statements, media rights, legend, corrections) and /{locale}/about (method, limits, credits)"
+  - "e2e/m2.spec.ts 'M2-T05': EN/ID record-count parity, descriptive https links; validate.test.ts rights gate. Correction contact still undesignated (release blocker)"
+- id: M3-T01
+  title: Scene performance
+  milestone: M3
+  status: todo
+  depends_on:
+  - M2-T01
+  - M2-T03
+  - M2-T04
+  acceptance:
+  - Lazy scene loading, quality adaptation, GPU cleanup and performance report
+  - Real device/browser measurements logged, budgets compared explicitly
+  evidence: []
+- id: M3-T02
+  title: Accessibility and language validation
+  milestone: M3
+  status: todo
+  depends_on:
+  - M2-T05
+  acceptance:
+  - WCAG audit, keyboard paths, reduced-motion, EN/ID parity
+  - No critical blockers; manual screen reader observations documented
+  evidence: []
+- id: M3-T03
+  title: E2E and visual regression suite
+  milestone: M3
+  status: todo
+  depends_on:
+  - M3-T01
+  - M3-T02
+  acceptance:
+  - CI-stable core paths, screenshots and fallback scenarios
+  - Tests pass on specified local and CI environments
+  evidence: []
+- id: M3-T04
+  title: Deployment and security
+  milestone: M3
+  status: todo
+  depends_on:
+  - M3-T03
+  acceptance:
+  - Static preview deployment, CSP/headers review, cache strategy
+  - No exposed secrets or forced analytics; preview is reproducible
+  evidence: []
+- id: M3-T05
+  title: Final MVP audit
+  milestone: M3
+  status: todo
+  depends_on:
+  - M3-T04
+  acceptance:
+  - Evidence ledger, asset rights register, technical release report
+  - P0 requirements checked; editorial gaps explicitly labeled prototype
+  evidence: []
+- id: M4-T01
+  title: Authentic 3D source and license audit
+  milestone: M4
+  status: todo
+  depends_on:
+  - M3-T05
+  acceptance:
+  - Obtain rights records and verify source/fidelity
+  - Reviewer approves source and reuse conditions before integration
+  evidence: []
+- id: M4-T02
+  title: Measured model integration and LOD
+  milestone: M4
+  status: todo
+  depends_on:
+  - M4-T01
+  acceptance:
+  - Optimize glTF assets and replace illustrative scene behind feature switch
+  - Fidelity, attribution, performance and accessibility checked
+  evidence: []
+- id: M4-T03
+  title: Research-backed relief stories
+  milestone: M4
+  status: todo
+  depends_on:
+  - M4-T01
+  acceptance:
+  - Build three to five authentic relief records, validated stories and EN/ID reviews
+  - Scholarly/editorial proof and individual media rights recorded
+  evidence: []
+- id: M5-T01
+  title: Cultural/editorial review and public release
+  milestone: M5
+  status: todo
+  depends_on:
+  - M4-T02
+  - M4-T03
+  acceptance:
+  - Optional narrated exhibition, comprehensive credits, launch review
+  - Editors approve historical claims and licenses; rollout/rollback documented
+  evidence: []

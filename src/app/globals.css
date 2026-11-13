@@ -1,0 +1,116 @@
+@import 'tailwindcss';
+@import '../styles/tokens.css';
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus-ring, var(--color-bronze));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .theme-paper {
+    --focus-ring: var(--color-bronze-deep);
+  }
+  dialog::backdrop {
+    background: rgb(10 12 12 / 0.7);
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-stone text-xs font-medium tracking-[0.18em] uppercase;
+  }
+  .btn-primary,
+  .btn-ghost {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 border px-4 py-2 text-sm font-medium transition-colors duration-200;
+  }
+  .btn-primary {
+    @apply border-bronze bg-bronze text-ink hover:bg-parchment hover:border-parchment;
+  }
+  .btn-ghost {
+    @apply border-stone/50 text-white hover:border-bronze hover:text-bronze;
+  }
+  .btn-ghost[aria-pressed='true'] {
+    @apply border-bronze bg-bronze/15 text-bronze;
+  }
+  :is(.btn-primary, .btn-ghost)[disabled] {
+    @apply cursor-not-allowed opacity-40 hover:border-stone/50 hover:text-white;
+  }
+  .link-dark {
+    @apply text-bronze underline decoration-bronze/50 underline-offset-4 hover:decoration-bronze;
+  }
+  .link-paper {
+    @apply text-bronze-deep underline decoration-bronze-deep/40 underline-offset-4 hover:decoration-bronze-deep;
+  }
+  .hairline {
+    @apply border-bronze/30;
+  }
+  .scene-backdrop {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 78%, rgb(196 165 123 / 0.1), transparent 70%),
+      radial-gradient(ellipse 120% 80% at 50% 100%, var(--color-mist), var(--color-ink) 70%);
+  }
+  .reveal {
+    animation: reveal 900ms var(--ease-monument) both;
+  }
+  .reveal-late {
+    animation: reveal 900ms var(--ease-monument) 180ms both;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Realm tones for the ascent: the backdrop opens up as the camera rises. */
+.scene-backdrop[data-tone='rupadhatu'] {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 60%, rgb(196 165 123 / 0.16), transparent 70%),
+    radial-gradient(ellipse 120% 80% at 50% 100%, #2b332f, var(--color-ink) 75%);
+}
+.scene-backdrop[data-tone='arupadhatu'] {
+  background:
+    radial-gradient(ellipse 100% 70% at 50% 35%, rgb(233 220 199 / 0.2), transparent 70%),
+    radial-gradient(ellipse 120% 90% at 50% 100%, #353d38, #1d2321 80%);
+}
+
+.era-veil {
+  background: var(--color-ink);
+  pointer-events: none;
+  animation: veil 700ms var(--ease-monument) both;
+}
+@keyframes veil {
+  from {
+    opacity: 0.85;
+  }
+  to {
+    opacity: 0;
+  }
+}

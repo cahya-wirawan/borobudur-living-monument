@@ -16,7 +16,7 @@ Version: 1.0 | Prepared: 2026-11-12 | Status: planning baseline, not implemented
 4. For an **individual scoped task**, use `docs/06_AGENT_TASKS.md` and `docs/08_AGENT_PLAYBOOK.md`.
 5. Work should remain deployable at each milestone; M1 must work without secrets, paid services, historical 3D scans, or proprietary content.
 
-**The package began as a specification and execution kit; milestones M0–M1 are now implemented as a labeled research prototype (see §8).** No licensed images or 3D monument models are bundled.
+**The package began as a specification and execution kit; milestones M0–M2 are now implemented as a labeled research prototype (see §8).** No licensed images or 3D monument models are bundled.
 
 ## 2. The experience in 30 seconds
 
@@ -88,7 +88,7 @@ The agent must add scripts matching these commands to `package.json`. Dependenci
 
 ## 8. Implementation status (2026-11-13)
 
-Milestones **M0** and **M1** are implemented: a runnable research prototype, not a reviewed exhibit. See `IMPLEMENTATION_LOG.md` and `TASKS.yaml`.
+Milestones **M0**, **M1** and **M2** are implemented: a runnable research prototype, not a reviewed exhibit. See `IMPLEMENTATION_LOG.md` and `TASKS.yaml`.
 
 ```bash
 pnpm install

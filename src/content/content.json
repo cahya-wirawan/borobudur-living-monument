@@ -1,0 +1,476 @@
+{
+  "schemaVersion": "1.1.0",
+  "monument": {
+    "id": "borobudur",
+    "title": {
+      "en": "Borobudur — The Living Monument",
+      "id": "Borobudur — Monumen yang Hidup"
+    },
+    "location": {
+      "en": "Central Java, Indonesia",
+      "id": "Jawa Tengah, Indonesia"
+    },
+    "illustrativeGeometry": true
+  },
+  "prototypeNotice": {
+    "en": "Research prototype. Visual geometry is illustrative, not a surveyed reconstruction; historical copy awaits editorial review.",
+    "id": "Prototipe riset. Geometri visual merupakan ilustrasi, bukan rekonstruksi berdasarkan survei; naskah sejarah masih menunggu peninjauan redaksi."
+  },
+  "sources": [
+    {
+      "id": "unesco-borobudur",
+      "title": "Borobudur Temple Compounds",
+      "publisher": "UNESCO World Heritage Centre",
+      "url": "https://whc.unesco.org/en/list/592/",
+      "accessedAt": "2026-11-12",
+      "type": "official"
+    }
+  ],
+  "claims": [
+    {
+      "id": "construction-period",
+      "text": {
+        "en": "Borobudur was constructed in the eighth and ninth centuries in Central Java.",
+        "id": "Borobudur dibangun pada abad ke-8 dan ke-9 di Jawa Tengah."
+      },
+      "evidenceStatus": "documented",
+      "reviewStatus": "draft",
+      "sourceIds": [
+        "unesco-borobudur"
+      ]
+    },
+    {
+      "id": "syailendra-dynasty",
+      "text": {
+        "en": "UNESCO states that the monument was built during the reign of the Syailendra Dynasty.",
+        "id": "UNESCO menyatakan bahwa monumen ini dibangun pada masa pemerintahan Wangsa Syailendra."
+      },
+      "evidenceStatus": "documented",
+      "reviewStatus": "draft",
+      "sourceIds": [
+        "unesco-borobudur"
+      ]
+    },
+    {
+      "id": "architectural-levels",
+      "text": {
+        "en": "The monument has five square terraces, three circular platforms, and a central monumental stupa.",
+        "id": "Monumen ini memiliki lima teras persegi, tiga pelataran melingkar, dan sebuah stupa utama di pusatnya."
+      },
+      "evidenceStatus": "documented",
+      "reviewStatus": "draft",
+      "sourceIds": [
+        "unesco-borobudur"
+      ]
+    },
+    {
+      "id": "seventy-two-stupas",
+      "text": {
+        "en": "UNESCO describes 72 openwork stupas around the circular platforms.",
+        "id": "UNESCO menjelaskan adanya 72 stupa berterawang di sekitar pelataran melingkar."
+      },
+      "evidenceStatus": "documented",
+      "reviewStatus": "draft",
+      "sourceIds": [
+        "unesco-borobudur"
+      ]
+    },
+    {
+      "id": "cosmological-realms",
+      "text": {
+        "en": "UNESCO associates the base with Kamadhatu, square terraces with Rupadhatu, and upper circular platforms and stupa with Arupadhatu.",
+        "id": "UNESCO mengaitkan bagian dasar dengan Kamadhatu, teras persegi dengan Rupadhatu, serta pelataran melingkar dan stupa utama dengan Arupadhatu."
+      },
+      "evidenceStatus": "documented",
+      "reviewStatus": "draft",
+      "sourceIds": [
+        "unesco-borobudur"
+      ]
+    },
+    {
+      "id": "restoration-period",
+      "text": {
+        "en": "UNESCO assisted the monument's restoration during the 1970s.",
+        "id": "UNESCO membantu pemugaran monumen ini pada dekade 1970-an."
+      },
+      "evidenceStatus": "documented",
+      "reviewStatus": "draft",
+      "sourceIds": [
+        "unesco-borobudur"
+      ]
+    },
+    {
+      "id": "nineteenth-century",
+      "text": {
+        "en": "The monument gained renewed recognition in the nineteenth century.",
+        "id": "Monumen ini kembali mendapat perhatian pada abad ke-19."
+      },
+      "evidenceStatus": "documented",
+      "reviewStatus": "draft",
+      "sourceIds": [
+        "unesco-borobudur"
+      ]
+    },
+    {
+      "id": "world-heritage-compounds",
+      "text": {
+        "en": "The World Heritage property “Borobudur Temple Compounds” also includes the Mendut and Pawon temples; this experience concentrates on the main monument.",
+        "id": "Properti Warisan Dunia “Borobudur Temple Compounds” juga mencakup Candi Mendut dan Candi Pawon; pengalaman ini berfokus pada monumen utama."
+      },
+      "evidenceStatus": "documented",
+      "reviewStatus": "draft",
+      "sourceIds": [
+        "unesco-borobudur"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "id": "awakening",
+      "title": {
+        "en": "The Awakening",
+        "id": "Kebangkitan"
+      },
+      "summary": {
+        "en": "Discover a monument shaped by history, art and symbolism.",
+        "id": "Temukan monumen yang dibentuk oleh sejarah, seni, dan simbolisme."
+      },
+      "claimIds": [
+        "construction-period",
+        "syailendra-dynasty",
+        "world-heritage-compounds"
+      ]
+    },
+    {
+      "id": "centuries",
+      "title": {
+        "en": "Across Centuries",
+        "id": "Menembus Abad"
+      },
+      "summary": {
+        "en": "Compare documented periods and hypothetical visualizations.",
+        "id": "Bandingkan periode terdokumentasi dan visualisasi hipotetis."
+      },
+      "claimIds": [
+        "construction-period",
+        "restoration-period",
+        "nineteenth-century"
+      ]
+    },
+    {
+      "id": "architecture",
+      "title": {
+        "en": "Inside the Monument",
+        "id": "Menjelajahi Arsitektur"
+      },
+      "summary": {
+        "en": "Read the architectural geometry of terraces and stupas.",
+        "id": "Kenali geometri arsitektur teras dan stupa."
+      },
+      "claimIds": [
+        "architectural-levels",
+        "seventy-two-stupas"
+      ]
+    },
+    {
+      "id": "stories",
+      "title": {
+        "en": "Stories in Stone",
+        "id": "Kisah dalam Batu"
+      },
+      "summary": {
+        "en": "Learn how relief interpretation works; the demonstration does not depict a verified panel.",
+        "id": "Pelajari cara penafsiran relief; demonstrasi ini tidak menggambarkan panel yang telah diverifikasi."
+      },
+      "claimIds": []
+    },
+    {
+      "id": "ascent",
+      "title": {
+        "en": "The Ascent",
+        "id": "Perjalanan Mendaki"
+      },
+      "summary": {
+        "en": "Explore three symbolic realms associated with Borobudur's architectural zones.",
+        "id": "Jelajahi tiga alam simbolis yang berkaitan dengan bagian arsitektur Borobudur."
+      },
+      "claimIds": [
+        "cosmological-realms"
+      ]
+    }
+  ],
+  "eras": [
+    {
+      "id": "construction",
+      "label": {
+        "en": "8th–9th centuries — illustrative construction",
+        "id": "Abad ke-8–9 — ilustrasi pembangunan"
+      },
+      "description": {
+        "en": "An artistic schematic imagining assembly; not a measured depiction of actual building methods or phases.",
+        "id": "Skema artistik yang membayangkan proses perakitan; bukan gambaran terukur mengenai metode atau tahap pembangunan sebenarnya."
+      },
+      "provenance": "artistic",
+      "claimIds": [
+        "construction-period"
+      ]
+    },
+    {
+      "id": "nineteenth-century",
+      "label": {
+        "en": "19th century — renewed attention",
+        "id": "Abad ke-19 — perhatian kembali"
+      },
+      "description": {
+        "en": "A representative period card, not an archival image or exact-site reconstruction.",
+        "id": "Kartu periode yang bersifat ilustratif, bukan foto arsip atau rekonstruksi situs yang tepat."
+      },
+      "provenance": "artistic",
+      "claimIds": [
+        "nineteenth-century"
+      ]
+    },
+    {
+      "id": "restoration",
+      "label": {
+        "en": "1970s — conservation",
+        "id": "1970-an — pelestarian"
+      },
+      "description": {
+        "en": "A schematic visual treatment of UNESCO-supported restoration, not a mapped record of individual stones.",
+        "id": "Visualisasi skematis pemugaran yang didukung UNESCO, bukan rekaman posisi setiap batu."
+      },
+      "provenance": "artistic",
+      "claimIds": [
+        "restoration-period"
+      ]
+    },
+    {
+      "id": "present",
+      "label": {
+        "en": "Present — illustrative monument",
+        "id": "Masa kini — ilustrasi monumen"
+      },
+      "description": {
+        "en": "The model describes recognizable architectural forms without claiming survey precision.",
+        "id": "Model menggambarkan bentuk arsitektur yang dapat dikenali tanpa mengklaim ketepatan survei."
+      },
+      "provenance": "artistic",
+      "claimIds": [
+        "architectural-levels"
+      ]
+    }
+  ],
+  "realms": [
+    {
+      "id": "kamadhatu",
+      "title": {
+        "en": "Kamadhatu — the realm of desire",
+        "id": "Kamadhatu — alam nafsu keinginan"
+      },
+      "explanation": {
+        "en": "In UNESCO's interpretation, the base corresponds to Kamadhatu.",
+        "id": "Dalam penafsiran UNESCO, bagian dasar melambangkan Kamadhatu."
+      },
+      "claimIds": [
+        "cosmological-realms"
+      ]
+    },
+    {
+      "id": "rupadhatu",
+      "title": {
+        "en": "Rupadhatu — the realm of form",
+        "id": "Rupadhatu — alam bentuk"
+      },
+      "explanation": {
+        "en": "In UNESCO's interpretation, the five square terraces correspond to Rupadhatu.",
+        "id": "Dalam penafsiran UNESCO, lima teras persegi melambangkan Rupadhatu."
+      },
+      "claimIds": [
+        "cosmological-realms"
+      ]
+    },
+    {
+      "id": "arupadhatu",
+      "title": {
+        "en": "Arupadhatu — the formless realm",
+        "id": "Arupadhatu — alam tanpa bentuk"
+      },
+      "explanation": {
+        "en": "In UNESCO's interpretation, the three circular platforms and main stupa correspond to Arupadhatu.",
+        "id": "Dalam penafsiran UNESCO, tiga pelataran melingkar dan stupa utama melambangkan Arupadhatu."
+      },
+      "claimIds": [
+        "cosmological-realms"
+      ]
+    }
+  ],
+  "features": [
+    {
+      "id": "base",
+      "title": {
+        "en": "The base",
+        "id": "Bagian dasar"
+      },
+      "description": {
+        "en": "The lowest and widest level in the drawing.",
+        "id": "Tingkat terbawah dan terlebar dalam gambar."
+      },
+      "claimIds": [
+        "cosmological-realms"
+      ]
+    },
+    {
+      "id": "square-terraces",
+      "title": {
+        "en": "Five square terraces",
+        "id": "Lima teras persegi"
+      },
+      "description": {
+        "en": "The five stepped square levels above the base.",
+        "id": "Lima tingkat persegi berundak di atas bagian dasar."
+      },
+      "claimIds": [
+        "architectural-levels"
+      ]
+    },
+    {
+      "id": "circular-platforms",
+      "title": {
+        "en": "Three circular platforms",
+        "id": "Tiga pelataran melingkar"
+      },
+      "description": {
+        "en": "The three round levels above the square terraces.",
+        "id": "Tiga tingkat bundar di atas teras persegi."
+      },
+      "claimIds": [
+        "architectural-levels"
+      ]
+    },
+    {
+      "id": "openwork-stupas",
+      "title": {
+        "en": "72 openwork stupas",
+        "id": "72 stupa berterawang"
+      },
+      "description": {
+        "en": "The small bell shapes on the circular platforms. The drawing simplifies them and does not show their openwork surfaces.",
+        "id": "Bentuk-bentuk lonceng kecil pada pelataran melingkar. Gambar ini menyederhanakannya dan tidak memperlihatkan permukaan berterawangnya."
+      },
+      "claimIds": [
+        "seventy-two-stupas"
+      ]
+    },
+    {
+      "id": "main-stupa",
+      "title": {
+        "en": "Central stupa",
+        "id": "Stupa utama"
+      },
+      "description": {
+        "en": "The large bell shape at the top and centre of the drawing.",
+        "id": "Bentuk lonceng besar di puncak dan pusat gambar."
+      },
+      "claimIds": [
+        "architectural-levels"
+      ]
+    }
+  ],
+  "reliefs": [
+    {
+      "id": "demo-panel-01",
+      "title": {
+        "en": "How stories can be read in stone — DEMO",
+        "id": "Cara membaca kisah pada batu — DEMO"
+      },
+      "description": {
+        "en": "This is a navigation and interpretation demo with no authenticated original panel. Add an identified, licensed and reviewed Borobudur relief before publication.",
+        "id": "Ini demonstrasi navigasi dan penafsiran tanpa panel asli yang terautentikasi. Tambahkan relief Borobudur yang teridentifikasi, berizin, dan telah ditinjau sebelum publikasi."
+      },
+      "demonstration": true,
+      "claimIds": [],
+      "mediaIds": [
+        "relief-demo-line-art"
+      ]
+    },
+    {
+      "id": "demo-panel-02",
+      "title": {
+        "en": "How a sequence of panels is presented — DEMO",
+        "id": "Cara rangkaian panel disajikan — DEMO"
+      },
+      "description": {
+        "en": "A second placeholder entry that demonstrates moving between stories with Previous and Next. It contains no authenticated original panel.",
+        "id": "Entri contoh kedua yang mendemonstrasikan perpindahan antar-kisah dengan tombol Sebelumnya dan Berikutnya. Entri ini tidak memuat panel asli yang terautentikasi."
+      },
+      "demonstration": true,
+      "claimIds": [],
+      "mediaIds": [
+        "relief-demo-line-art-02"
+      ]
+    }
+  ],
+  "media": [
+    {
+      "id": "monument-procedural-model",
+      "src": "procedural:src/scene/MonumentPlaceholder.tsx",
+      "kind": "model",
+      "alt": {
+        "en": "Illustrative 3D schematic of a stepped monument: a square base, five square terraces, three circular platforms with small stupas and a central stupa. Not a surveyed reconstruction.",
+        "id": "Skema 3D ilustratif sebuah monumen berundak: dasar persegi, lima teras persegi, tiga pelataran melingkar dengan stupa-stupa kecil, dan stupa utama di tengah. Bukan rekonstruksi berdasarkan survei."
+      },
+      "attribution": "Procedural geometry generated in code by the project team. Illustrative geometry — not a surveyed reconstruction.",
+      "creator": "Borobudur — The Living Monument project team (repository-authored)",
+      "licenseId": "project-original",
+      "rightsReviewed": false,
+      "isOriginal": true,
+      "provenance": "artistic"
+    },
+    {
+      "id": "monument-schematic-diagram",
+      "src": "inline:src/components/shell/MonumentSchematic.tsx",
+      "kind": "illustration",
+      "alt": {
+        "en": "Illustrative elevation diagram of the monument's levels, from the base through five square terraces and three circular platforms to the central stupa. Proportions are not measured.",
+        "id": "Diagram tampak ilustratif tingkat-tingkat monumen, dari bagian dasar, lima teras persegi, dan tiga pelataran melingkar hingga stupa utama. Proporsi tidak diukur."
+      },
+      "attribution": "Original schematic line drawing authored in code by the project team. Proportions are illustrative, not measured.",
+      "creator": "Borobudur — The Living Monument project team (repository-authored)",
+      "licenseId": "project-original",
+      "rightsReviewed": false,
+      "isOriginal": true,
+      "provenance": "artistic"
+    },
+    {
+      "id": "relief-demo-line-art",
+      "src": "inline:src/features/reliefs/ReliefDemoArt.tsx",
+      "kind": "illustration",
+      "alt": {
+        "en": "Demonstration artwork: an abstract framed panel of simple line shapes. It does not depict any original Borobudur relief.",
+        "id": "Karya demonstrasi: panel berbingkai abstrak dengan bentuk garis sederhana. Tidak menggambarkan relief asli Borobudur mana pun."
+      },
+      "attribution": "Original abstract line art authored in code by the project team. Demonstration artwork — not a specific original panel.",
+      "creator": "Borobudur — The Living Monument project team (repository-authored)",
+      "licenseId": "project-original",
+      "rightsReviewed": false,
+      "isOriginal": true,
+      "provenance": "artistic"
+    },
+    {
+      "id": "relief-demo-line-art-02",
+      "src": "inline:src/features/reliefs/ReliefDemoArt.tsx",
+      "kind": "illustration",
+      "alt": {
+        "en": "Demonstration artwork: an abstract framed panel divided into three plain sections. It does not depict any original Borobudur relief.",
+        "id": "Karya demonstrasi: panel berbingkai abstrak yang dibagi menjadi tiga bagian polos. Tidak menggambarkan relief asli Borobudur mana pun."
+      },
+      "attribution": "Original abstract line art authored in code by the project team. Demonstration artwork — not a specific original panel.",
+      "creator": "Borobudur — The Living Monument project team (repository-authored)",
+      "licenseId": "project-original",
+      "rightsReviewed": false,
+      "isOriginal": true,
+      "provenance": "artistic"
+    }
+  ]
+}
