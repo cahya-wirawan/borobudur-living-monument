@@ -45,6 +45,9 @@ const SECURITY_HEADERS = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // The Docker image sets NEXT_OUTPUT=standalone for a small self-contained server.
+  // Left unset elsewhere so `next start` keeps working.
+  output: process.env.NEXT_OUTPUT === 'standalone' ? 'standalone' : undefined,
   poweredByHeader: false,
   // Pin the workspace root so a stray lockfile in a parent directory is never picked up.
   turbopack: { root: __dirname },

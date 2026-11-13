@@ -1,0 +1,20 @@
+# Run the production build locally:
+#   docker compose up --build        then open http://localhost:3000
+#   docker compose down              to stop
+# Use another host port with:  PORT=8080 docker compose up --build
+services:
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+        RELEASE_CHANNEL: ${RELEASE_CHANNEL:-}
+    image: borobudur-living-monument:local
+    ports:
+      - '${PORT:-3000}:3000'
+    restart: unless-stopped
+    # The app needs no privileges, no secrets and no outbound network access.
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

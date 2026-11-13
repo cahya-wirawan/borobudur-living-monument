@@ -11,6 +11,14 @@ exhibition.
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-11-13 — Docker image and Compose file
+
+### Added
+
+- `Dockerfile` and `compose.yaml`: run the production build with `docker compose up --build`.
+- `E2E_BASE_URL` runs the end-to-end tests against an already running instance.
+- README section on running locally with Node.js or Docker.
+
 ## [0.4.1] - 2026-11-13 — MIT License and Vercel readiness
 
 ### Added
@@ -81,7 +89,8 @@ _Not tagged separately: delivered in the same initial commit as 0.2.0._
 - Validated content pack with claim, source and media-rights records, and a release audit that fails on unreviewed content.
 - Vitest, Playwright and axe test foundations and a CI workflow.
 
-[Unreleased]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.2...HEAD
+[0.4.2]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/cahya-wirawan/borobudur-living-monument/releases/tag/v0.3.0

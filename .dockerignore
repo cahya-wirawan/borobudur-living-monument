@@ -1,0 +1,15 @@
+.git
+.github
+.next
+.vercel
+node_modules
+test-results
+playwright-report
+e2e
+*.tsbuildinfo
+.env*
+Dockerfile
+compose.yaml
+BOROBUDUR_MASTER_SPEC.md
+docs
+examples
