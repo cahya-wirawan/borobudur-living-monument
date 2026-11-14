@@ -1,8 +1,8 @@
 {
   "name": "borobudur-living-monument",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "private": true,
-  "description": "BOROBUDUR \u2014 The Living Monument. Research prototype with illustrative geometry.",
+  "description": "BOROBUDUR — The Living Monument. Research prototype with illustrative geometry.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -39,8 +39,8 @@
     ]
   },
   "dependencies": {
-    "@fontsource-variable/inter": "^5.3.0",
-    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource-variable/source-sans-3": "^5.3.1",
+    "@fontsource/marcellus": "^5.3.0",
     "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^9.8.2",
     "gsap": "^3.15.1",

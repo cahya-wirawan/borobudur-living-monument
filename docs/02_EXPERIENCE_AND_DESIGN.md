@@ -7,15 +7,20 @@ Cinematic storytelling should function like an interactive documentary: the visi
 
 | Token | Hex / approach | Use |
 | --- | --- | --- |
-| `--color-ink` | `#171B1B` | main dark canvas |
-| `--color-basalt` | `#303732` | panels / secondary dark |
-| `--color-stone` | `#A6A195` | tertiary type / wireframe |
-| `--color-bronze` | `#C4A57B` | CTA, active indicators, diagram lines |
-| `--color-parchment` | `#E9DCC7` | warm light surfaces |
-| `--color-paper` | `#F4F0E7` | reading page background |
-| `--color-white` | `#F9F7F1` | primary type on dark |
+The identity is **dawn over the monument** (ADR-024): night indigo rising through plum into saffron light. Token names are unchanged from the first version; the values below are current.
 
-Use generous whitespace, a narrow editorial reading measure (60–75 characters), restrained gradients, 1px golden architectural lines, and soft shadows. Aim for AA text contrast. Typography: source a licensed display serif (e.g., Instrument Serif if its current license permits) and a geometric sans (e.g., Inter); create resilient system fallbacks.
+| Token | Hex / approach | Use |
+| --- | --- | --- |
+| `--color-ink` | `#0E0F26` | night sky, main dark canvas |
+| `--color-basalt` | `#1A1A3A` | panels / secondary dark |
+| `--color-stone` | `#ACA8C4` | tertiary type on dark |
+| `--color-bronze` | `#F2B451` | saffron: CTA, active indicators, diagram lines |
+| `--color-bronze-deep` | `#7A4700` | links and accents on light pages |
+| `--color-parchment` | `#F3E3C8` | warm light text and surfaces |
+| `--color-paper` | `#F3F0F5` | reading page background |
+| `--color-white` | `#FBF8F4` | primary type on dark |
+
+Every drawing of the monument sits in an artistic sky with three lights — night, dawn and day — defined once in `src/scene/atmosphere.ts` and mirrored in CSS for the still diagram. The sky, sun, stars and ridge line are labelled artistic and never depict the real site. Shapes follow the monument: square panels, round controls. Use generous whitespace and a narrow reading measure (60–75 characters). Aim for AA text contrast. Typography: Marcellus (inscriptional display) and Source Sans 3 (text), self-hosted with system fallbacks.
 
 ## 3. Five-chapter interactive storyboard
 

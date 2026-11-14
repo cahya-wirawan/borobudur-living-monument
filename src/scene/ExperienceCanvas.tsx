@@ -12,8 +12,10 @@ import {
   shouldDegrade,
   type RenderableQuality,
 } from '@/lib/performance';
+import { ATMOSPHERES, type SkyTone } from './atmosphere';
 import { CameraDirector } from './CameraDirector';
 import { MonumentPlaceholder } from './MonumentPlaceholder';
+import { SkyEnvironment } from './SkyEnvironment';
 import { reliefHotspotPosition, type SceneHighlight } from './monument-spec';
 import { DEFAULT_FOV, WAYPOINTS, type WaypointKey } from './waypoints';
 
@@ -26,6 +28,8 @@ export type ExperienceCanvasProps = {
   quality: RenderableQuality;
   treatment: EraTreatment;
   highlight: SceneHighlight;
+  /** Which light the artistic setting is shown in. */
+  tone: SkyTone;
   /** Relief-story hotspots; rendered as real buttons into `hotspotLayer`. */
   hotspots: readonly SceneHotspot[];
   hotspotLayer: RefObject<HTMLDivElement | null>;
@@ -79,7 +83,7 @@ function Hotspots({
         {/* A plain plaque on the wall so the button has something to point at. */}
         <mesh position={[0, 0, 0.02]}>
           <planeGeometry args={[1.5, 0.3]} />
-          <meshBasicMaterial color="#e9dcc7" transparent opacity={0.85} />
+          <meshBasicMaterial color="#f2b451" transparent opacity={0.9} />
         </mesh>
         <Html
           center
@@ -93,7 +97,7 @@ function Hotspots({
             data-hotspot={hotspot.id}
             aria-label={hotspot.ariaLabel}
             onClick={() => onActivate(hotspot.id)}
-            className="btn-primary whitespace-nowrap shadow-lg shadow-black/40"
+            className="hotspot"
           >
             {hotspot.label}
           </button>
@@ -115,6 +119,7 @@ export default function ExperienceCanvas({
   quality,
   treatment,
   highlight,
+  tone,
   hotspots,
   hotspotLayer,
   skipToken,
@@ -126,14 +131,16 @@ export default function ExperienceCanvas({
 }: ExperienceCanvasProps) {
   const settings = QUALITY_SETTINGS[quality];
   const initial = WAYPOINTS[waypointKey];
+  const atmosphere = ATMOSPHERES[tone];
 
   return (
     <Canvas
       // Nothing animates between transitions, so render on demand to spare battery and heat.
       frameloop="demand"
+      shadows={settings.shadows}
       dpr={[1, settings.maxDpr]}
       gl={{ antialias: settings.antialias, alpha: true, powerPreference: 'default' }}
-      camera={{ position: initial.position, fov: DEFAULT_FOV, near: 0.5, far: 160 }}
+      camera={{ position: initial.position, fov: DEFAULT_FOV, near: 0.5, far: 700 }}
       onCreated={({ gl }) => {
         gl.domElement.addEventListener('webglcontextlost', (event) => {
           event.preventDefault();
@@ -142,15 +149,18 @@ export default function ExperienceCanvas({
         onReady();
       }}
     >
-      <fog attach="fog" args={['#171b1b', 30, 90]} />
-      <hemisphereLight args={['#e9dcc7', '#171b1b', 0.75]} />
-      <directionalLight position={[9, 14, 6]} intensity={1.7} color="#f4e6cf" />
-      <directionalLight position={[-10, 5, -8]} intensity={0.35} color="#9fb3ad" />
+      <SkyEnvironment
+        atmosphere={atmosphere}
+        shadows={settings.shadows}
+        shadowMapSize={settings.shadowMapSize}
+      />
       <MonumentPlaceholder
         treatment={treatment}
         highlight={highlight}
+        tones={atmosphere}
         segments={settings.radialSegments}
         edges={settings.edges}
+        shadows={settings.shadows}
       />
       <FrameWatch quality={quality} onQualityDrop={onQualityDrop} />
       <Hotspots hotspots={hotspots} layer={hotspotLayer} onActivate={onHotspotActivate} />

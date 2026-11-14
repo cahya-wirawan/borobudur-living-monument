@@ -11,6 +11,21 @@ exhibition.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-14 — Visual identity: dawn over the monument
+
+### Changed
+
+- New visual identity, "dawn over the monument": night-indigo and saffron palette, Marcellus and Source Sans 3 typefaces, rounded controls.
+- The 3D scene has a procedural sky with sun, stars and a generic ridge line, cast shadows and three lights (night, dawn, day). The ascent brightens from zone to zone; the outline-only period card is shown at night.
+- Landing page redrawn as a sunrise behind the monument silhouette.
+- The still diagram and Read-mode figures use the same sky and shaded stone.
+- Captions now state that sky, light and ridges are artistic and do not depict the real site.
+- The low quality preset renders at up to 1.5× pixel density with antialiasing.
+
+### Removed
+
+- The duplicate "01 / 05" counter in the header.
+
 ## [0.4.2] - 2026-11-13 — Docker image and Compose file
 
 ### Added
@@ -89,7 +104,8 @@ _Not tagged separately: delivered in the same initial commit as 0.2.0._
 - Validated content pack with claim, source and media-rights records, and a release audit that fails on unreviewed content.
 - Vitest, Playwright and axe test foundations and a CI workflow.
 
-[Unreleased]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.2...HEAD
+[Unreleased]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.3.0...v0.4.0

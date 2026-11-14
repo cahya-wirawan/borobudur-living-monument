@@ -31,10 +31,10 @@ export function ReliefCatalog({
             <li
               key={relief.id}
               data-relief={relief.id}
-              className="bg-ink grid gap-3 border border-bronze/40 p-4"
+              className="bg-basalt grid gap-3 rounded-2xl border border-white/10 p-4"
             >
               {relief.demonstration && (
-                <p className="bg-bronze text-ink px-2 py-1 text-center text-xs font-semibold tracking-wider">
+                <p className="bg-bronze text-ink rounded-full px-3 py-1 text-center text-xs font-semibold tracking-wide">
                   {t.demoBanner}
                 </p>
               )}

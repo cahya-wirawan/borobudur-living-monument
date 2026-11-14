@@ -10,9 +10,9 @@ export function PrototypeBanner({ pack, locale }: { pack: ContentPack; locale: L
     <aside aria-label={label}>
       <p
         data-testid="prototype-banner"
-        className="bg-basalt text-parchment border-b border-bronze/30 px-4 py-1.5 text-center text-xs leading-snug"
+        className="text-stone bg-[#07081a] px-4 py-1.5 text-center text-xs leading-snug"
       >
-        <strong className="font-semibold tracking-wide uppercase">{label}</strong>
+        <strong className="text-parchment font-semibold">{label}</strong>
         {' — '}
         {pack.prototypeNotice[locale]}
       </p>

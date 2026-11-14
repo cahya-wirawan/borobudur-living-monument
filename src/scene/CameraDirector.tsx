@@ -15,6 +15,11 @@ import {
   type WaypointKey,
 } from './waypoints';
 
+// Transitions follow the clock, not the frame count: by default GSAP stretches a
+// tween when frames arrive slowly, which would let the capped opening glide
+// overrun its limit on a struggling device.
+gsap.ticker.lagSmoothing(0);
+
 type Pose = { px: number; py: number; pz: number; tx: number; ty: number; tz: number };
 
 /**

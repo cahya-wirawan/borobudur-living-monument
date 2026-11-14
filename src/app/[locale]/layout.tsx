@@ -13,7 +13,7 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = { metadataBase: new URL(SITE_URL) };
-export const viewport: Viewport = { themeColor: '#171b1b', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#0e0f26', width: 'device-width', initialScale: 1 };
 
 export default async function LocaleLayout({
   children,

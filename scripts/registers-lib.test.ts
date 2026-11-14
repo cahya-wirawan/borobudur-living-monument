@@ -45,8 +45,8 @@ describe('audit registers', () => {
   it('rights register reports no third-party media and lists both typefaces', () => {
     const markdown = rightsRegisterMarkdown(pack);
     expect(markdown).toContain('- Third-party media: 0');
-    expect(markdown).toContain('Instrument Serif');
-    expect(markdown).toContain('Inter');
+    expect(markdown).toContain('Marcellus');
+    expect(markdown).toContain('Source Sans 3');
     for (const media of pack.media) expect(markdown).toContain(`\`${media.id}\``);
   });
 });

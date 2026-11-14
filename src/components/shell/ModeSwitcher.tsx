@@ -18,7 +18,7 @@ export function ModeSwitcher({
 }) {
   const t = getDictionary(locale).modes;
   return (
-    <div role="group" aria-label={t.label} className="flex">
+    <div role="group" aria-label={t.label} className="segmented">
       {(['guided', 'explore'] as const).map((mode) => (
         <button
           key={mode}
@@ -26,16 +26,11 @@ export function ModeSwitcher({
           title={mode === 'guided' ? t.guidedHint : t.exploreHint}
           aria-pressed={state.mode === mode}
           onClick={() => onSelect(mode)}
-          className="btn-ghost -ml-px first:ml-0 px-3"
         >
           {t[mode]}
         </button>
       ))}
-      <Link
-        href={readHref(locale, state.chapter)}
-        title={t.readHint}
-        className="btn-ghost -ml-px px-3"
-      >
+      <Link href={readHref(locale, state.chapter)} title={t.readHint}>
         {t.read}
       </Link>
     </div>

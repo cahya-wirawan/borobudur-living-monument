@@ -44,7 +44,6 @@ const en = {
   chapters: {
     railLabel: 'Chapters',
     progress: 'Chapter {current} of {total}',
-    progressShort: '{current} / {total}',
     next: 'Next',
     back: 'Back',
     nextTo: 'Next: {title}',
@@ -56,15 +55,15 @@ const en = {
     endBody: 'Review every statement and its source, or read the full story as text.',
     captions: {
       awakening:
-        'The setting and the monument outline shown here are synthetic illustrations made for this prototype.',
+        'The sky, light, distant ridges and monument outline shown here are synthetic illustrations made for this prototype. They do not depict the real site.',
       centuries:
-        'The camera stays fixed while the drawing style changes. Each style is a visual treatment, not a record of how the monument looked.',
+        'The camera stays fixed while the drawing style and the light change. Each is a visual treatment, not a record of how the monument looked.',
       architecture:
         'The diagram counts levels as UNESCO describes them. Sizes and proportions are not measured.',
       stories:
         'This chapter shows how a relief story will be presented. The artwork is a demonstration, not a carving from the monument.',
       ascent:
-        'The three zones follow the interpretation described by UNESCO. The camera path is not a real or historical walking route.',
+        'The three zones follow the interpretation described by UNESCO. The camera path is not a real or historical walking route, and the changing light is an artistic device.',
     } satisfies Record<ChapterId, string>,
   },
   hero: {
@@ -245,7 +244,7 @@ const en = {
     creditsHeading: 'Credits and licenses',
     credits: [
       'Illustrations, 3D geometry and source code: original work by the project team, released under the MIT License.',
-      'Typefaces: Instrument Serif and Inter, self-hosted under the SIL Open Font License 1.1.',
+      'Typefaces: Marcellus and Source Sans 3, self-hosted under the SIL Open Font License 1.1.',
       'Software: Next.js, React, three.js, React Three Fiber, drei and GSAP, used under their respective open-source or standard no-charge licenses.',
     ],
     legendHeading: 'Evidence labels',
@@ -300,7 +299,6 @@ const id: Dictionary = {
   chapters: {
     railLabel: 'Bab',
     progress: 'Bab {current} dari {total}',
-    progressShort: '{current} / {total}',
     next: 'Lanjut',
     back: 'Kembali',
     nextTo: 'Lanjut: {title}',
@@ -313,15 +311,15 @@ const id: Dictionary = {
       'Tinjau setiap pernyataan beserta sumbernya, atau baca seluruh kisah dalam bentuk teks.',
     captions: {
       awakening:
-        'Latar dan garis bentuk monumen yang ditampilkan di sini adalah ilustrasi sintetis yang dibuat untuk prototipe ini.',
+        'Langit, cahaya, perbukitan di kejauhan, dan garis bentuk monumen yang ditampilkan di sini adalah ilustrasi sintetis yang dibuat untuk prototipe ini. Semuanya tidak menggambarkan situs yang sebenarnya.',
       centuries:
-        'Kamera tetap diam sementara gaya gambar berubah. Setiap gaya adalah perlakuan visual, bukan catatan tentang rupa monumen pada masa itu.',
+        'Kamera tetap diam sementara gaya gambar dan cahaya berubah. Keduanya adalah perlakuan visual, bukan catatan tentang rupa monumen pada masa itu.',
       architecture:
         'Diagram menghitung tingkat sebagaimana dijelaskan UNESCO. Ukuran dan proporsinya tidak diukur.',
       stories:
         'Bab ini memperlihatkan cara kisah relief akan disajikan. Karya gambarnya adalah demonstrasi, bukan pahatan dari monumen.',
       ascent:
-        'Ketiga zona mengikuti penafsiran yang dijelaskan UNESCO. Lintasan kamera bukan rute berjalan yang nyata ataupun historis.',
+        'Ketiga zona mengikuti penafsiran yang dijelaskan UNESCO. Lintasan kamera bukan rute berjalan yang nyata ataupun historis, dan perubahan cahaya adalah perangkat artistik.',
     },
   },
   hero: {
@@ -501,7 +499,7 @@ const id: Dictionary = {
     creditsHeading: 'Kredit dan lisensi',
     credits: [
       'Ilustrasi, geometri 3D, dan kode sumber: karya asli tim proyek, dirilis di bawah Lisensi MIT.',
-      'Huruf: Instrument Serif dan Inter, dihosting sendiri di bawah SIL Open Font License 1.1.',
+      'Huruf: Marcellus dan Source Sans 3, dihosting sendiri di bawah SIL Open Font License 1.1.',
       'Perangkat lunak: Next.js, React, three.js, React Three Fiber, drei, dan GSAP, digunakan sesuai lisensi sumber terbuka atau lisensi standar tanpa biaya masing-masing.',
     ],
     legendHeading: 'Label bukti',

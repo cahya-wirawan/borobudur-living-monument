@@ -21,11 +21,14 @@ export function ReliefDemoCard({
   const t = getDictionary(locale).relief;
   const art = selectMedia(pack, relief.mediaIds)[0];
   return (
-    <article data-relief={relief.id} className="border border-bronze/40 bg-ink grid gap-3 p-4">
+    <article
+      data-relief={relief.id}
+      className="bg-basalt grid gap-3 rounded-2xl border border-white/10 p-4"
+    >
       {relief.demonstration && (
         <p
           data-testid="relief-demo-banner"
-          className="bg-bronze text-ink px-2 py-1 text-center text-xs font-semibold tracking-wider"
+          className="bg-bronze text-ink rounded-full px-3 py-1 text-center text-xs font-semibold tracking-wide"
         >
           {t.demoBanner}
         </p>

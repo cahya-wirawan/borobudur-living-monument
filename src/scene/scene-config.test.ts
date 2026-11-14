@@ -1,3 +1,4 @@
+import { ATMOSPHERES, ridgeHeight, seededSequence, skyToneFor } from './atmosphere';
 import { describe, expect, it } from 'vitest';
 import { CHAPTER_IDS, ERA_IDS, REALM_IDS } from '@/content/types';
 import { TOTAL_LEVELS, eraTreatment, sceneTreatment } from '@/features/time-machine/era-mapping';
@@ -129,6 +130,29 @@ describe('scene wiring for M2', () => {
     expect(highlightForRealm('rupadhatu')!.levelIds).toHaveLength(5);
     expect(highlightForRealm('arupadhatu')).toMatchObject({ smallStupas: true });
     expect(highlightForRealm('arupadhatu')!.levelIds).toHaveLength(4);
+  });
+
+  it('chooses the artistic light from the selection only', () => {
+    expect(skyToneFor('awakening', 'present', 'kamadhatu')).toBe('dawn');
+    expect(skyToneFor('centuries', 'nineteenth-century', 'kamadhatu')).toBe('night');
+    expect(skyToneFor('centuries', 'restoration', 'kamadhatu')).toBe('dawn');
+    expect(
+      (['kamadhatu', 'rupadhatu', 'arupadhatu'] as const).map((realm) =>
+        skyToneFor('ascent', 'present', realm),
+      ),
+    ).toEqual(['night', 'dawn', 'day']);
+    for (const tone of ['night', 'dawn', 'day'] as const)
+      expect(ATMOSPHERES[tone].fogFar).toBeGreaterThan(ATMOSPHERES[tone].fogNear);
+  });
+
+  it('draws the same sky on every visit', () => {
+    const first = seededSequence(72);
+    const second = seededSequence(72);
+    const values = Array.from({ length: 50 }, () => first());
+    expect(Array.from({ length: 50 }, () => second())).toEqual(values);
+    expect(values.every((value) => value >= 0 && value < 1)).toBe(true);
+    for (let step = 0; step < 64; step += 1)
+      expect(ridgeHeight((step / 64) * Math.PI * 2, 0)).toBeGreaterThan(0);
   });
 
   it('spreads relief hotspots along one wall without overlap', () => {

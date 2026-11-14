@@ -39,8 +39,10 @@ export function StaticPage({
       <header className="border-b border-bronze-deep/30">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-1 px-5 py-2">
           <Link href="/" className="flex min-h-11 items-baseline gap-2">
-            <span className="font-display text-2xl leading-none">{t.common.wordmark}</span>
-            <span className="text-ink/75 text-xs font-medium tracking-[0.18em] uppercase max-sm:hidden">
+            <span className="font-display text-2xl leading-none tracking-wide">
+              {t.common.wordmark}
+            </span>
+            <span className="text-ink/75 text-sm font-medium tracking-[0.06em] max-sm:hidden">
               {t.common.tagline}
             </span>
           </Link>

@@ -76,10 +76,10 @@ export function SourceDrawer({
       open={open}
       onClose={onClose}
       labelledBy="source-drawer-title"
-      className="bg-basalt m-0 ml-auto h-dvh max-h-none w-full max-w-xl border-l border-bronze/40 p-0 text-white"
+      className="bg-basalt m-0 ml-auto h-dvh max-h-none w-full max-w-xl border-l border-white/15 p-0 text-white"
     >
       <div className="flex h-full flex-col">
-        <header className="flex items-start justify-between gap-4 border-b border-bronze/30 p-5">
+        <header className="flex items-start justify-between gap-4 border-b border-white/10 p-5">
           <h2 id="source-drawer-title" className="font-display text-3xl leading-tight">
             {t.sources.drawerTitle}
           </h2>

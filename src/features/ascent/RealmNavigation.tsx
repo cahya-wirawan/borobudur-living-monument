@@ -82,7 +82,7 @@ export function RealmNavigation({
         <div data-testid="realm-detail" className="grid gap-3">
           <h2 className="font-display text-3xl leading-tight">{selected.title[locale]}</h2>
           <p className="text-parchment">{selected.explanation[locale]}</p>
-          <div className="scene-backdrop max-w-xs p-3">
+          <div className="scene-backdrop max-w-xs overflow-hidden rounded-2xl p-3">
             <MonumentSchematic
               idPrefix="realm-zone"
               title={t.diagramLabel}
