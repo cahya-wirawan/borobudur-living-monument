@@ -86,14 +86,14 @@ export function evidenceLedgerCsv(pack: ContentPack): string {
 /** Bundled typefaces. Update together with src/app/fonts.ts. */
 export const FONT_REGISTER = [
   {
-    name: 'Instrument Serif',
-    source: '@fontsource/instrument-serif (npm)',
+    name: 'Marcellus',
+    source: '@fontsource/marcellus (npm)',
     license: 'SIL Open Font License 1.1',
     use: 'Display headings',
   },
   {
-    name: 'Inter',
-    source: '@fontsource-variable/inter (npm)',
+    name: 'Source Sans 3',
+    source: '@fontsource-variable/source-sans-3 (npm)',
     license: 'SIL Open Font License 1.1',
     use: 'Body text and controls',
   },

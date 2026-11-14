@@ -5,6 +5,7 @@
  *
  *   pnpm build && pnpm start --port 3100   # in another terminal
  *   node scripts/visual-inspect.mjs [outDir] [baseUrl]
+ *   ONLY=landing,read VIEW=desktop node scripts/visual-inspect.mjs   # a subset while iterating
  */
 import { chromium } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
@@ -85,8 +86,11 @@ const browser = await chromium.launch({
 });
 const problems = [];
 
+const only = process.env.ONLY?.split(',');
 for (const [viewportName, viewport] of Object.entries(VIEWPORTS)) {
+  if (process.env.VIEW && process.env.VIEW !== viewportName) continue;
   for (const shot of SHOTS) {
+    if (only && !only.includes(shot.name)) continue;
     const context = await browser.newContext({
       viewport: { width: viewport.width, height: viewport.height },
       isMobile: viewport.isMobile ?? false,

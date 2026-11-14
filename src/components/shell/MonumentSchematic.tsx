@@ -88,12 +88,14 @@ export function MonumentSchematic({
   const look = (built: boolean, highlighted: boolean) => {
     const dimmed = highlight !== null && !highlighted;
     return {
-      fill: !built || sketch ? 'none' : highlighted ? 'var(--color-bronze)' : 'var(--color-rock)',
+      fill:
+        !built || sketch ? 'none' : highlighted ? 'var(--color-bronze)' : `url(#${idPrefix}-stone)`,
       stroke: !built
         ? 'var(--color-stone)'
         : sketch
           ? 'var(--color-parchment)'
           : 'var(--color-bronze)',
+      strokeOpacity: built && !sketch && !highlighted ? 0.55 : 1,
       strokeDasharray: built ? undefined : '5 4',
       opacity: dimmed ? 0.45 : built ? 1 : 0.7,
       vectorEffect: 'non-scaling-stroke' as const,
@@ -110,14 +112,28 @@ export function MonumentSchematic({
     >
       <title id={`${idPrefix}-title`}>{title}</title>
       <desc id={`${idPrefix}-desc`}>{description}</desc>
+      <defs>
+        {/* Light falls from above: a shading device, not a record of the stone's colour. */}
+        <linearGradient
+          id={`${idPrefix}-stone`}
+          gradientUnits="userSpaceOnUse"
+          x1={0}
+          x2={0}
+          y1={-MONUMENT_HEIGHT}
+          y2={0}
+        >
+          <stop offset="0" stopColor="var(--stone-top, #b7a39a)" />
+          <stop offset="1" stopColor="var(--stone-bottom, #4f4463)" />
+        </linearGradient>
+      </defs>
       <line
         x1={-halfWidth}
         x2={halfWidth}
         y1={0}
         y2={0}
-        stroke="var(--color-stone)"
+        stroke="var(--color-parchment)"
         strokeWidth={1}
-        opacity={0.6}
+        opacity={0.35}
         vectorEffect="non-scaling-stroke"
       />
       {MONUMENT_LEVELS.map((level, index) => {

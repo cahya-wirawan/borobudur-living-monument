@@ -98,7 +98,8 @@ test.describe('GPU lifecycle', () => {
   });
 
   test('repeated mount and unmount releases WebGL contexts', async ({ page }) => {
-    test.setTimeout(150_000);
+    // Twenty scene starts with shadows on a software renderer: slow, but only here.
+    test.setTimeout(300_000);
     await openExperience(page, '/en/experience?chapter=centuries');
     // Browsers allow roughly 16 live contexts; leaking one per visit would fail well before 20.
     for (let visit = 0; visit < 20; visit++) {

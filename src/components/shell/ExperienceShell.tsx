@@ -238,20 +238,13 @@ export function ExperienceShell({
         </a>
         <PrototypeBanner pack={pack} locale={locale} />
 
-        <header className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-bronze/30 px-3 py-2 sm:px-5">
+        <header className="flex flex-wrap items-center gap-x-5 gap-y-2 px-3 py-2 sm:px-5">
           <Link href="/" className="flex min-h-11 items-baseline gap-2">
-            <span className="font-display text-2xl leading-none">{t.common.wordmark}</span>
+            <span className="font-display text-xl leading-none tracking-wide sm:text-2xl">
+              {t.common.wordmark}
+            </span>
             <span className="eyebrow max-sm:hidden">{t.common.tagline}</span>
           </Link>
-          <p
-            aria-hidden="true"
-            className="text-stone text-sm tabular-nums tracking-widest max-lg:hidden"
-          >
-            {format(t.chapters.progressShort, {
-              current: String(position).padStart(2, '0'),
-              total: String(total).padStart(2, '0'),
-            })}
-          </p>
           <div className="max-lg:w-full max-lg:order-last lg:order-2 lg:ml-auto">
             <ModeSwitcher
               locale={locale}
@@ -264,15 +257,12 @@ export function ExperienceShell({
           </div>
           <nav
             aria-label={t.common.mainNavLabel}
-            className="ml-auto flex items-center gap-x-4 text-sm lg:order-3 lg:ml-0"
+            className="ml-auto flex items-center gap-x-3 sm:gap-x-4 lg:order-3 lg:ml-0"
           >
-            <Link
-              href={`/${locale}/sources`}
-              className="link-dark inline-flex min-h-11 items-center"
-            >
+            <Link href={`/${locale}/sources`} className="nav-link">
               {t.nav.sources}
             </Link>
-            <Link href={`/${locale}/about`} className="link-dark inline-flex min-h-11 items-center">
+            <Link href={`/${locale}/about`} className="nav-link">
               {t.nav.about}
             </Link>
             <Link
@@ -282,7 +272,7 @@ export function ExperienceShell({
               aria-label={format(t.common.switchLanguage, {
                 language: t.common.languageNames[other],
               })}
-              className="link-dark inline-flex min-h-11 items-center"
+              className="nav-link"
             >
               {t.common.languageNames[other]}
             </Link>
@@ -317,17 +307,20 @@ export function ExperienceShell({
 
           <section
             aria-labelledby="chapter-title"
-            className="border-bronze/30 px-5 py-7 sm:px-8 lg:overflow-y-auto lg:border-l lg:py-10"
+            className="px-5 py-7 sm:px-8 lg:overflow-y-auto lg:py-10 lg:pr-10"
           >
             <div key={state.chapter} className="mx-auto grid max-w-[62ch] gap-6">
               <header className="reveal grid gap-3">
                 <p className="eyebrow">
                   {format(t.chapters.progress, { current: position, total })}
                 </p>
-                <h1 id="chapter-title" className="font-display text-5xl leading-[1.02] sm:text-6xl">
+                <h1
+                  id="chapter-title"
+                  className="font-display text-5xl leading-[1.04] text-balance sm:text-6xl"
+                >
                   {chapterTitle}
                 </h1>
-                <p className="text-parchment text-lg leading-relaxed">{chapter?.summary[locale]}</p>
+                <p className="text-parchment text-xl leading-relaxed">{chapter?.summary[locale]}</p>
               </header>
 
               <div className="reveal-late grid gap-6">
@@ -390,7 +383,7 @@ export function ExperienceShell({
                   <ClaimList claims={chapterClaims} pack={pack} locale={locale} />
                 )}
 
-                <div className="grid gap-2 border-t border-bronze/30 pt-4">
+                <div className="grid gap-2 border-t border-white/10 pt-4">
                   <p>
                     <EvidenceBadge status="artistic" locale={locale} />
                   </p>

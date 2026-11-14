@@ -26,8 +26,8 @@ MIT License (see `LICENSE`). Typefaces keep their own license, listed below.
 
 | Typeface | Source | License | Use |
 | --- | --- | --- | --- |
-| Instrument Serif | @fontsource/instrument-serif (npm) | SIL Open Font License 1.1 | Display headings |
-| Inter | @fontsource-variable/inter (npm) | SIL Open Font License 1.1 | Body text and controls |
+| Marcellus | @fontsource/marcellus (npm) | SIL Open Font License 1.1 | Display headings |
+| Source Sans 3 | @fontsource-variable/source-sans-3 (npm) | SIL Open Font License 1.1 | Body text and controls |
 
 ## References cited
 

@@ -311,7 +311,7 @@ test.describe('M2-T04 Journey to Enlightenment', () => {
     await expect(stage(page)).toHaveAttribute('data-scene-status', 'ready', { timeout: 20_000 });
     await page.getByRole('button', { name: /^Naik: Arupadhatu/ }).click();
     await expect(page).toHaveURL(/realm=arupadhatu/);
-    await expect(page.locator('.scene-backdrop[data-tone="arupadhatu"]')).toHaveCount(1);
+    await expect(page.locator('.scene-backdrop[data-tone="day"]')).toHaveCount(1);
     await expect(page.getByTestId('realm-detail')).toContainText('Arupadhatu');
   });
 });

@@ -43,7 +43,7 @@ export function ReliefDetail({
       fallbackFocus={() =>
         document.querySelector<HTMLElement>(`[data-relief-open="${pack.reliefs[0]?.id ?? ''}"]`)
       }
-      className="bg-basalt m-auto max-h-[92dvh] w-[min(46rem,calc(100vw-1.5rem))] max-w-none border border-bronze/50 p-0 text-white"
+      className="bg-basalt m-auto max-h-[92dvh] w-[min(46rem,calc(100vw-1.5rem))] max-w-none overflow-hidden rounded-3xl border border-white/15 p-0 text-white"
     >
       {relief && (
         <div
@@ -51,7 +51,7 @@ export function ReliefDetail({
           data-relief-detail={relief.id}
           className="flex max-h-[92dvh] flex-col"
         >
-          <header className="flex items-start justify-between gap-4 border-b border-bronze/30 p-5">
+          <header className="flex items-start justify-between gap-4 border-b border-white/10 p-5">
             <div className="grid gap-1">
               <p className="eyebrow">
                 {format(t.position, { current: index + 1, total: pack.reliefs.length })}
@@ -70,12 +70,12 @@ export function ReliefDetail({
               {relief.demonstration && (
                 <p
                   data-testid="relief-demo-banner"
-                  className="bg-bronze text-ink px-2 py-1 text-center text-xs font-semibold tracking-wider"
+                  className="bg-bronze text-ink rounded-full px-3 py-1 text-center text-xs font-semibold tracking-wide"
                 >
                   {t.demoBanner}
                 </p>
               )}
-              <div className="bg-ink p-3">
+              <div className="bg-ink rounded-2xl p-3">
                 <ReliefDemoArt
                   idPrefix={`detail-${relief.id}`}
                   label={art?.alt[locale] ?? t.demoNotice}
@@ -129,7 +129,7 @@ export function ReliefDetail({
             </section>
           </div>
 
-          <footer className="flex items-center justify-between gap-3 border-t border-bronze/30 p-4">
+          <footer className="flex items-center justify-between gap-3 border-t border-white/10 p-4">
             <button
               type="button"
               className="btn-ghost"

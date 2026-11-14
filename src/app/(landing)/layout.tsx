@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/', languages: { en: '/en/experience', id: '/id/experience' } },
   robots: IS_PUBLIC_RELEASE ? undefined : { index: false, follow: false },
 };
-export const viewport: Viewport = { themeColor: '#171b1b', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#0e0f26', width: 'device-width', initialScale: 1 };
 
 export default function LandingLayout({ children }: { children: ReactNode }) {
   return (

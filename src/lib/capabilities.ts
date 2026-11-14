@@ -41,9 +41,37 @@ export function detectSceneQuality(): SceneQuality {
 
 export const QUALITY_SETTINGS: Record<
   Exclude<SceneQuality, 'none'>,
-  { maxDpr: number; radialSegments: number; antialias: boolean; edges: boolean }
+  {
+    maxDpr: number;
+    radialSegments: number;
+    antialias: boolean;
+    edges: boolean;
+    shadows: boolean;
+    shadowMapSize: number;
+  }
 > = {
-  low: { maxDpr: 1, radialSegments: 24, antialias: false, edges: true },
-  medium: { maxDpr: 1.5, radialSegments: 40, antialias: true, edges: true },
-  high: { maxDpr: 2, radialSegments: 64, antialias: true, edges: true },
+  low: {
+    maxDpr: 1.5,
+    radialSegments: 24,
+    antialias: true,
+    edges: true,
+    shadows: false,
+    shadowMapSize: 0,
+  },
+  medium: {
+    maxDpr: 1.5,
+    radialSegments: 40,
+    antialias: true,
+    edges: true,
+    shadows: true,
+    shadowMapSize: 1024,
+  },
+  high: {
+    maxDpr: 2,
+    radialSegments: 64,
+    antialias: true,
+    edges: true,
+    shadows: true,
+    shadowMapSize: 2048,
+  },
 };

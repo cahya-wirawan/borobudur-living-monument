@@ -58,3 +58,14 @@ Add one entry per agent session, newest at bottom. Keep notes factual, max ~300 
 - **Manual checks:** screenshot set reviewed after changes; no console errors, external requests or overflow.
 - **Known issues and blockers:** see `docs/release-report-v0.4.0.md` section 5.
 - **Next task:** unblock `M3-T01`/`M3-T02`/`M3-T04` with the owner; otherwise `M4-T01` needs partner assets and cannot start.
+
+## 2026-11-14 — Session 5
+
+- **Task IDs:** none (owner request: "make it a beautiful, artistic and spectacular website"). Visual redesign, ADR-024.
+- **Files changed:** `src/styles/tokens.css`, `src/app/globals.css`, `src/app/fonts.ts`, landing page, shell components, `src/scene/{atmosphere.ts,SkyEnvironment.tsx,MonumentPlaceholder.tsx,ExperienceCanvas.tsx,CameraDirector.tsx}`, `src/lib/capabilities.ts`, captions in `src/i18n/dictionaries.ts`, 20 visual baselines, `docs/02` tokens, `docs/10` ADR-024, rights register (typefaces).
+- **Commands and results:** `pnpm lint`, `typecheck`, `format:check` clean; `pnpm test` 97 passed; `pnpm build` ok; `pnpm test:e2e` 124 passed, 14 skipped by design.
+- **Found and fixed:** prototype banner failed contrast on light pages; mode switcher parts were below the 44 px touch aim; the opening glide could overrun its 4 s cap when frames arrive slowly (GSAP lag smoothing, now off); the 20-visit GPU test needed a longer limit under software rendering.
+- **Manual checks:** 25 views × 2 sizes captured with `scripts/visual-inspect.mjs` and reviewed; no console errors, external requests or overflow.
+- **Truth-status and rights:** no new historical claims and no third-party media. Sky, sun, stars and ridge line are repo-authored and captioned as artistic; no architectural feature was added beyond the cited counts.
+- **Known issues:** shadows and the larger sky have not been measured on real phones (`M3-T01` still blocked on devices). The overhead architecture view shows little sky and is the plainest of the scenes.
+- **Next task:** unchanged — unblock `M3-T01`/`M3-T02`/`M3-T04` with the owner.

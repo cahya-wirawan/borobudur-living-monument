@@ -36,11 +36,11 @@ export function ChapterNav({
   return (
     <nav
       aria-label={t.railLabel}
-      className="bg-ink z-20 flex shrink-0 items-center gap-3 border-t border-bronze/30 px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:px-5"
+      className="bg-ink z-20 flex shrink-0 items-center gap-3 border-t border-white/10 px-3 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] sm:px-5"
     >
       <button
         type="button"
-        className="btn-ghost shrink-0"
+        className="btn-ghost shrink-0 max-sm:w-11 max-sm:px-0"
         disabled={!previous}
         aria-label={previous ? format(t.backTo, { title: titleOf(previous) }) : t.firstChapter}
         onClick={() => previous && go(previous)}
@@ -68,13 +68,13 @@ export function ChapterNav({
                   event.preventDefault();
                   go(id);
                 }}
-                className={`flex min-h-11 flex-col justify-center border-t-2 px-1 pt-1 text-center text-xs transition-colors sm:text-left ${
+                className={`flex min-h-11 items-baseline justify-center gap-2 border-t-2 px-1 pt-1.5 text-sm transition-colors md:justify-start ${
                   current
                     ? 'border-bronze text-bronze'
-                    : 'border-stone/40 text-stone hover:border-bronze/70 hover:text-white'
+                    : 'border-white/15 text-stone hover:border-bronze/70 hover:text-white'
                 }`}
               >
-                <span aria-hidden="true" className="font-medium tracking-widest">
+                <span aria-hidden="true" className="font-display text-base tabular-nums">
                   {number}
                 </span>
                 <span className="truncate max-md:sr-only">{titleOf(id)}</span>
@@ -86,7 +86,7 @@ export function ChapterNav({
 
       <button
         type="button"
-        className="btn-primary shrink-0"
+        className="btn-primary shrink-0 max-sm:w-11 max-sm:px-0"
         disabled={!next}
         aria-label={next ? format(t.nextTo, { title: titleOf(next) }) : t.lastChapter}
         onClick={() => next && go(next)}

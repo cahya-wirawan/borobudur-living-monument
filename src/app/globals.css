@@ -26,23 +26,56 @@
 
 @layer components {
   .eyebrow {
-    @apply text-stone text-xs font-medium tracking-[0.18em] uppercase;
+    @apply text-stone text-sm font-medium tracking-[0.06em];
   }
   .btn-primary,
   .btn-ghost {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 border px-4 py-2 text-sm font-medium transition-colors duration-200;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border px-5 py-2 text-[0.95rem] font-semibold transition-colors duration-200;
   }
   .btn-primary {
     @apply border-bronze bg-bronze text-ink hover:bg-parchment hover:border-parchment;
+    box-shadow: 0 0 2.25rem -0.5rem rgb(242 180 81 / 0.55);
   }
   .btn-ghost {
-    @apply border-stone/50 text-white hover:border-bronze hover:text-bronze;
+    @apply border-white/25 bg-white/[0.06] text-white hover:border-bronze hover:text-bronze;
   }
   .btn-ghost[aria-pressed='true'] {
     @apply border-bronze bg-bronze/15 text-bronze;
   }
+  /* Multi-line choices read as cards, not pills. */
+  .btn-ghost.text-left {
+    @apply rounded-2xl py-2.5;
+  }
   :is(.btn-primary, .btn-ghost)[disabled] {
-    @apply cursor-not-allowed opacity-40 hover:border-stone/50 hover:text-white;
+    @apply cursor-not-allowed opacity-40 hover:border-white/25 hover:text-white;
+    box-shadow: none;
+  }
+  .theme-paper .btn-ghost {
+    @apply border-ink/30 text-ink hover:border-bronze-deep hover:text-bronze-deep bg-transparent;
+  }
+  /* Guided / Explore / Read: one rounded control with three parts. */
+  .segmented {
+    @apply inline-flex rounded-full border border-white/20 bg-white/[0.06] p-1;
+  }
+  .segmented > * {
+    @apply text-parchment inline-flex min-h-11 items-center rounded-full px-4 text-sm font-semibold transition-colors duration-200 hover:text-white;
+  }
+  .segmented > [aria-pressed='true'] {
+    @apply bg-bronze text-ink hover:text-ink;
+  }
+  .chip {
+    @apply text-parchment rounded-full border border-white/15 px-3 py-1 text-xs;
+    background: rgb(14 15 38 / 0.72);
+    backdrop-filter: blur(6px);
+  }
+  .hotspot {
+    @apply bg-bronze text-ink relative inline-flex min-h-11 items-center rounded-full px-4 text-sm font-semibold whitespace-nowrap;
+    box-shadow:
+      0 0 0 0.4rem rgb(242 180 81 / 0.22),
+      0 0.6rem 1.6rem rgb(5 6 26 / 0.55);
+  }
+  .hotspot:hover {
+    @apply bg-parchment;
   }
   .link-dark {
     @apply text-bronze underline decoration-bronze/50 underline-offset-4 hover:decoration-bronze;
@@ -50,19 +83,151 @@
   .link-paper {
     @apply text-bronze-deep underline decoration-bronze-deep/40 underline-offset-4 hover:decoration-bronze-deep;
   }
+  .nav-link {
+    @apply text-parchment hover:text-bronze inline-flex min-h-11 items-center text-sm sm:text-[0.95rem] font-medium underline decoration-transparent underline-offset-8 transition-colors duration-200 hover:decoration-bronze;
+  }
   .hairline {
     @apply border-bronze/30;
-  }
-  .scene-backdrop {
-    background:
-      radial-gradient(ellipse 90% 60% at 50% 78%, rgb(196 165 123 / 0.1), transparent 70%),
-      radial-gradient(ellipse 120% 80% at 50% 100%, var(--color-mist), var(--color-ink) 70%);
   }
   .reveal {
     animation: reveal 900ms var(--ease-monument) both;
   }
   .reveal-late {
     animation: reveal 900ms var(--ease-monument) 180ms both;
+  }
+
+  /*
+   * The artistic sky behind every drawing of the monument. It is a setting,
+   * not a record of a place or a time of day. The 3D scene paints the same
+   * tones (src/scene/atmosphere.ts).
+   */
+  .scene-backdrop {
+    --sky-zenith: #0f1030;
+    --sky-upper: #2a2258;
+    --sky-band: #7a3a62;
+    --sky-horizon: #e8824c;
+    --sky-glow: rgb(255 197 107 / 0.9);
+    --sky-floor: #2a1f3f;
+    --sky-stars: 0.55;
+    --stone-top: #b7a39a;
+    --stone-bottom: #4f4463;
+    --sky-line: 74%;
+    --sky-fall: 14%;
+    position: relative;
+    isolation: isolate;
+    background:
+      radial-gradient(ellipse 46% 30% at 50% var(--sky-line), var(--sky-glow), transparent 72%),
+      linear-gradient(
+        to bottom,
+        var(--sky-zenith) 0%,
+        var(--sky-upper) calc(var(--sky-line) - 40%),
+        var(--sky-band) calc(var(--sky-line) - 16%),
+        var(--sky-horizon) var(--sky-line),
+        var(--sky-floor) calc(var(--sky-line) + var(--sky-fall)),
+        var(--color-ink) calc(var(--sky-line) + var(--sky-fall) * 1.9)
+      );
+  }
+  .scene-backdrop[data-tone='night'] {
+    --sky-zenith: #05061a;
+    --sky-upper: #0e0f2e;
+    --sky-band: #1d1a47;
+    --sky-horizon: #3a2e66;
+    --sky-glow: rgb(140 120 220 / 0.35);
+    --sky-floor: #14132e;
+    --sky-stars: 1;
+    --stone-top: #8a86ac;
+    --stone-bottom: #33325a;
+  }
+  .scene-backdrop[data-tone='day'] {
+    --sky-zenith: #3f6fb0;
+    --sky-upper: #86a9d6;
+    --sky-band: #f1cfa4;
+    --sky-horizon: #ffe6b3;
+    --sky-glow: rgb(255 246 218 / 0.95);
+    --sky-floor: #6d5a62;
+    --sky-stars: 0;
+    --stone-top: #dfcfb6;
+    --stone-bottom: #7d6f7c;
+  }
+  /* Stars: a fixed, hand-placed scatter that fades out toward the horizon. */
+  .scene-backdrop::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: var(--sky-stars);
+    background-image:
+      radial-gradient(1.2px 1.2px at 6% 9%, #fff, transparent),
+      radial-gradient(1px 1px at 13% 31%, #e9e2ff, transparent),
+      radial-gradient(1.4px 1.4px at 19% 14%, #fff, transparent),
+      radial-gradient(1px 1px at 24% 42%, #fff, transparent),
+      radial-gradient(1px 1px at 31% 7%, #ffe9c4, transparent),
+      radial-gradient(1.3px 1.3px at 37% 24%, #fff, transparent),
+      radial-gradient(1px 1px at 43% 12%, #e9e2ff, transparent),
+      radial-gradient(1px 1px at 48% 36%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 55% 5%, #fff, transparent),
+      radial-gradient(1px 1px at 61% 21%, #ffe9c4, transparent),
+      radial-gradient(1px 1px at 66% 39%, #fff, transparent),
+      radial-gradient(1.3px 1.3px at 72% 11%, #fff, transparent),
+      radial-gradient(1px 1px at 78% 28%, #e9e2ff, transparent),
+      radial-gradient(1.2px 1.2px at 84% 6%, #fff, transparent),
+      radial-gradient(1px 1px at 89% 33%, #fff, transparent),
+      radial-gradient(1.4px 1.4px at 94% 17%, #ffe9c4, transparent),
+      radial-gradient(1px 1px at 3% 46%, #fff, transparent),
+      radial-gradient(1px 1px at 97% 44%, #fff, transparent),
+      radial-gradient(1px 1px at 52% 19%, #fff, transparent),
+      radial-gradient(1px 1px at 28% 27%, #fff, transparent);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 58%);
+  }
+  /* Landing: the monument stands against the light, so it is drawn as a dark shape. */
+  .landing-sky {
+    --sky-line: 88%;
+    --sky-fall: 6%;
+    --stone-top: #3b2a57;
+    --stone-bottom: #17122f;
+  }
+  .sun {
+    position: absolute;
+    left: 50%;
+    bottom: 66%;
+    width: min(62vw, 30rem);
+    aspect-ratio: 1;
+    translate: -50% 50%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      #fff6da 0%,
+      #ffe2a0 24%,
+      #ffc56b 31%,
+      rgb(255 177 85 / 0.38) 34%,
+      rgb(232 130 76 / 0.14) 52%,
+      transparent 70%
+    );
+    animation: sunrise 2600ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  /* Lets the scene dissolve into the reading column instead of ending at a line. */
+  .stage-fade {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 82%, var(--color-ink) 100%);
+  }
+  @media (width >= 64rem) {
+    .stage-fade {
+      background: linear-gradient(to right, transparent 80%, var(--color-ink) 100%);
+    }
+  }
+}
+
+@keyframes sunrise {
+  from {
+    opacity: 0;
+    translate: -50% 95%;
+  }
+  to {
+    opacity: 1;
+    translate: -50% 50%;
   }
 }
 
@@ -87,18 +252,6 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Realm tones for the ascent: the backdrop opens up as the camera rises. */
-.scene-backdrop[data-tone='rupadhatu'] {
-  background:
-    radial-gradient(ellipse 90% 60% at 50% 60%, rgb(196 165 123 / 0.16), transparent 70%),
-    radial-gradient(ellipse 120% 80% at 50% 100%, #2b332f, var(--color-ink) 75%);
-}
-.scene-backdrop[data-tone='arupadhatu'] {
-  background:
-    radial-gradient(ellipse 100% 70% at 50% 35%, rgb(233 220 199 / 0.2), transparent 70%),
-    radial-gradient(ellipse 120% 90% at 50% 100%, #353d38, #1d2321 80%);
 }
 
 .era-veil {

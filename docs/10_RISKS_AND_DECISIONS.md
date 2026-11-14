@@ -124,3 +124,7 @@
 4. Whether optional voice narration is commissioned, and by whom.
 
 These decisions should **not** block initial functional prototype.
+
+### ADR-024 — Visual identity: dawn over the monument (2026-11-14)
+**Choice:** replace the grey-green palette, Instrument Serif and Inter with a night-to-dawn palette, Marcellus and Source Sans 3 (both SIL OFL 1.1, self-hosted; supersedes the typeface choice in ADR-013). The 3D scene gains a procedural sky, sun, stars, a generic ridge line, shadows and three lights (`night`, `dawn`, `day`) chosen from the experience state; the still diagram and landing page use the same tones in CSS. The low quality preset now renders at up to 1.5× pixel density with antialiasing, without shadows.  
+**Reason:** the owner judged the first design unattractive and asked for a spectacular one; `docs/02` already called for an atmospheric landscape. Everything added is repo-authored code, so no rights question arises. The setting is art direction only: captions say so, the ridge line traces no named landform, and no architectural feature was added beyond the cited counts (a thin top course on each terrace is a drawing device, noted in code). The low preset was visibly jagged on phones; the frame watch still cannot go below it, so real-device measurement (`M3-T01`) matters more than before.
