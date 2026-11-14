@@ -21,7 +21,10 @@ ARG NEXT_PUBLIC_SITE_URL=http://localhost:3000
 # Leave empty for a prototype build. "public" enables indexing and makes the
 # build fail while any content is unreviewed.
 ARG RELEASE_CHANNEL=
+# Optional browser key for the Google Maps flight (public by design; restrict it by referrer).
+ARG NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$NEXT_PUBLIC_GOOGLE_MAPS_API_KEY \
     RELEASE_CHANNEL=$RELEASE_CHANNEL \
     NEXT_OUTPUT=standalone
 # Runs the content audit first (prebuild), then the production build.

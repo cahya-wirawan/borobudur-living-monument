@@ -11,6 +11,16 @@ exhibition.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-14 — Aerial flight with Google Maps (optional)
+
+### Added
+
+- Optional "Fly over the real site" view: a five-stop aerial flight drawn by Google Maps inside the stage, with previous, next, play and pause controls. It appears only when `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` is set at build time, contacts Google only after the visitor agrees, and is labelled as third-party imagery. Not yet tested with a real key (ADR-025).
+
+### Changed
+
+- With a Google Maps key configured, the content security policy also allows Google's map hosts. Without a key it is unchanged.
+
 ## [0.5.0] - 2026-11-14 — Visual identity: dawn over the monument
 
 ### Changed
@@ -104,7 +114,8 @@ _Not tagged separately: delivered in the same initial commit as 0.2.0._
 - Validated content pack with claim, source and media-rights records, and a release audit that fails on unreviewed content.
 - Vitest, Playwright and axe test foundations and a CI workflow.
 
-[Unreleased]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/cahya-wirawan/borobudur-living-monument/compare/v0.4.0...v0.4.1

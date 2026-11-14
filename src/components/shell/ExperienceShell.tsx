@@ -303,6 +303,7 @@ export function ExperienceShell({
             onQualityDrop={dropQuality}
             onSkipIntro={skipIntro}
             onHotspotActivate={openRelief}
+            onFlyoverChange={(open) => dispatch({ type: 'SET_FLYOVER', open })}
           />
 
           <section
@@ -388,6 +389,11 @@ export function ExperienceShell({
                     <EvidenceBadge status="artistic" locale={locale} />
                   </p>
                   <p className="text-stone text-sm">{t.chapters.captions[state.chapter]}</p>
+                  {state.flyoverOpen && (
+                    <p data-testid="flyover-note" className="text-stone text-sm">
+                      {t.flyover.caption}
+                    </p>
+                  )}
                 </div>
 
                 {position === total && <Recap pack={pack} locale={locale} />}

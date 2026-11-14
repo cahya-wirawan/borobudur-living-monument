@@ -22,7 +22,8 @@ An interactive, source-cited introduction to Borobudur, the 8th–9th-century Bu
 - **Works without 3D:** if WebGL is unavailable the same content is shown with a still diagram. Read mode works without JavaScript.
 - **Accessible by design:** keyboard operable, screen-reader labels, reduced-motion support, no audio, no hover-only controls. Targets WCAG 2.2 AA.
 - **Shareable links:** the address bar always reflects the current chapter and selection, and Back/Forward work.
-- **No external services:** no accounts, API keys, analytics or third-party media. Fonts are self-hosted.
+- **No external services by default:** no accounts, API keys, analytics or third-party media. Fonts are self-hosted.
+- **Optional aerial flight:** with a Google Maps key, visitors can choose to fly over the real site in a Google Maps 3D view. See [Google Maps flight](#google-maps-flight).
 
 ## Requirements
 
@@ -126,18 +127,37 @@ To run the end-to-end tests against an instance that is already running (a conta
 
 ## Configuration
 
-Both variables are optional.
+All variables are optional.
 
-| Variable               | Purpose                                                                                                   |
-| ---------------------- | --------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | Base URL for canonical and language-alternate links. Defaults to `http://localhost:3000`.                 |
-| `RELEASE_CHANNEL`      | Set to `public` to allow search indexing. This also makes the build fail while any content is unreviewed. |
+| Variable                          | Purpose                                                                                                   |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`            | Base URL for canonical and language-alternate links. Defaults to `http://localhost:3000`.                 |
+| `RELEASE_CHANNEL`                 | Set to `public` to allow search indexing. This also makes the build fail while any content is unreviewed. |
+| `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` | Turns on the Google Maps flight. Read at build time.                                                      |
 
 Without `RELEASE_CHANNEL=public`, every page asks search engines not to index it.
 
+### Google Maps flight
+
+The flight is off unless a key is set. To turn it on:
+
+1. In the Google Cloud console, create a project with billing enabled and enable the **Maps JavaScript API**.
+2. Create an API key. Restrict it to your site's HTTP referrers (for local use, `http://localhost:3000/*`) and to the Maps JavaScript API. The key is visible to every visitor, so the restriction is what protects it.
+3. Put it in `.env.local` as `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=...` and restart `pnpm dev`, or rebuild. With Docker, export the variable before `docker compose up --build`.
+
+A "Fly over the real site" button then appears on the monument view. Google is contacted only after the visitor agrees.
+
+Things to know:
+
+- Map loads are billed by Google to your account.
+- Google's coverage table lists 3D maps as unavailable for Indonesia, so the view may be satellite imagery on terrain rather than a 3D model of the monument.
+- This has been tested with a stand-in for Google's script and with an invalid key, not with a real key. The camera target in `src/features/flyover/tour.ts` is an estimate and may need adjusting.
+
+The decision record is ADR-025 in [`docs/10_RISKS_AND_DECISIONS.md`](docs/10_RISKS_AND_DECISIONS.md).
+
 ## Security and privacy
 
-The app sets no cookies, uses no browser storage, loads nothing from other sites and has no analytics. Every response carries security headers including a same-origin content security policy. Deployment notes are in [`docs/09_DEPLOYMENT_OPERATIONS.md`](docs/09_DEPLOYMENT_OPERATIONS.md).
+By default the app sets no cookies, uses no browser storage, loads nothing from other sites and has no analytics. Every response carries security headers including a same-origin content security policy. If the Google Maps flight is configured, the policy also allows Google's map hosts, and a visitor who starts the flight connects to Google and has that choice remembered for the browser session. Deployment notes are in [`docs/09_DEPLOYMENT_OPERATIONS.md`](docs/09_DEPLOYMENT_OPERATIONS.md).
 
 ## Content and provenance
 

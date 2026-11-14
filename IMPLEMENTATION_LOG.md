@@ -69,3 +69,14 @@ Add one entry per agent session, newest at bottom. Keep notes factual, max ~300 
 - **Truth-status and rights:** no new historical claims and no third-party media. Sky, sun, stars and ridge line are repo-authored and captioned as artistic; no architectural feature was added beyond the cited counts.
 - **Known issues:** shadows and the larger sky have not been measured on real phones (`M3-T01` still blocked on devices). The overhead architecture view shows little sky and is the plainest of the scenes.
 - **Next task:** unchanged — unblock `M3-T01`/`M3-T02`/`M3-T04` with the owner.
+
+## 2026-11-14 — Session 6
+
+- **Task IDs:** none (owner request: "integrate seamlessly 3D flying tour above Borobudur using Google Maps"). ADR-025.
+- **Files changed:** new `src/features/flyover/{tour.ts,google-maps.ts,FlyoverStage.tsx,flyover.test.tsx}`, `e2e/flyover.spec.ts`; `controller.ts` (`flyoverOpen`), `SceneStage.tsx`, `ExperienceShell.tsx`, `dictionaries.ts`, `globals.css`, `next.config.ts` (conditional policy, `distDir`), `playwright.config.ts` (second keyed build), `.env.example`, `Dockerfile`, `compose.yaml`, README, rights register (services).
+- **Commands and results:** `pnpm lint`, `typecheck`, `format:check`, `registers:generate --check` clean; `pnpm test` 105 passed; `pnpm test:e2e` 134 passed, 14 skipped by design (includes 10 flight tests against a stand-in for Google's script).
+- **Manual checks:** consent, loading and failure states captured at 1440×900 and 390×844 against Google's real script with an invalid key: the script loads under the widened policy with no policy violations, the real `Map3DElement` accepts the options used, and the rejected key leads to the failure message.
+- **Found and fixed:** on a phone the flight controls covered the Close button; the consent panel did not fit the short mobile stage; a rejected key left the controls over Google's error card.
+- **Truth-status and rights:** no historical claim added. Imagery is Google's, streamed, labelled as third-party and not stored. Nothing is requested from Google before consent.
+- **Known issues:** never run with a real key, so the rendered map, the camera target, the stop framing, billing and the need for `'unsafe-eval'` are unverified. Google lists 3D maps as unavailable for Indonesia.
+- **Next task:** owner supplies a restricted key; then check the flight by eye, adjust `tour.ts`, and tighten the policy.

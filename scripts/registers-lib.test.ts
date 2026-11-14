@@ -47,6 +47,7 @@ describe('audit registers', () => {
     expect(markdown).toContain('- Third-party media: 0');
     expect(markdown).toContain('Marcellus');
     expect(markdown).toContain('Source Sans 3');
+    expect(markdown).toContain('Google Maps Platform');
     for (const media of pack.media) expect(markdown).toContain(`\`${media.id}\``);
   });
 });

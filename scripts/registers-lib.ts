@@ -83,6 +83,16 @@ export function evidenceLedgerCsv(pack: ContentPack): string {
   );
 }
 
+/** Services contacted at view time. Nothing from them is stored in the repository. */
+export const SERVICE_REGISTER = [
+  {
+    name: 'Google Maps Platform — Maps JavaScript API, 3D maps',
+    use: 'Optional aerial flight. Off unless a key is configured; loaded only after the visitor agrees',
+    terms: 'Google Maps Platform Terms of Service; Google logo and data credits must stay visible',
+    review: 'Not reviewed by a person; not yet seen with a real key (ADR-025)',
+  },
+] as const;
+
 /** Bundled typefaces. Update together with src/app/fonts.ts. */
 export const FONT_REGISTER = [
   {
@@ -132,6 +142,12 @@ export function rightsRegisterMarkdown(pack: ContentPack): string {
     '| Typeface | Source | License | Use |',
     '| --- | --- | --- | --- |',
     ...FONT_REGISTER.map((f) => `| ${f.name} | ${f.source} | ${f.license} | ${f.use} |`),
+    '',
+    '## Third-party services',
+    '',
+    '| Service | Use | Terms | Review |',
+    '| --- | --- | --- | --- |',
+    ...SERVICE_REGISTER.map((s) => `| ${s.name} | ${s.use} | ${s.terms} | ${s.review} |`),
     '',
     '## References cited',
     '',

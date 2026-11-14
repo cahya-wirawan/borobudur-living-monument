@@ -23,7 +23,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    ".next-flyover/types/**/*.ts",
+    ".next-flyover/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
