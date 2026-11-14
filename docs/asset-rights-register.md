@@ -29,6 +29,12 @@ MIT License (see `LICENSE`). Typefaces keep their own license, listed below.
 | Marcellus | @fontsource/marcellus (npm) | SIL Open Font License 1.1 | Display headings |
 | Source Sans 3 | @fontsource-variable/source-sans-3 (npm) | SIL Open Font License 1.1 | Body text and controls |
 
+## Third-party services
+
+| Service | Use | Terms | Review |
+| --- | --- | --- | --- |
+| Google Maps Platform — Maps JavaScript API, 3D maps | Optional aerial flight. Off unless a key is configured; loaded only after the visitor agrees | Google Maps Platform Terms of Service; Google logo and data credits must stay visible | Not reviewed by a person; not yet seen with a real key (ADR-025) |
+
 ## References cited
 
 | ID | Publisher | Title | URL | Accessed |

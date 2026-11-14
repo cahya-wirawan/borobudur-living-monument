@@ -91,6 +91,42 @@ const en = {
     schematicNote: 'Schematic elevation. Proportions are illustrative, not measured.',
     realmBandLabel: '{realm} zone',
   },
+  flyover: {
+    open: 'Fly over the real site',
+    regionLabel: 'Aerial flight over the site, shown with Google Maps',
+    imageryLabel: 'Aerial imagery from Google Maps — not made or checked by this project',
+    mapDescription:
+      'Aerial view of the Borobudur site from Google Maps. The camera moves between five viewpoints. Every chapter stays available as text.',
+    consentTitle: 'Fly over the site with Google Maps',
+    consentBody:
+      'This flight is drawn by Google Maps. Starting it connects your browser to Google, which receives your IP address and may set cookies. Nothing is sent to Google until you start.',
+    coverageNote:
+      'Google decides what appears. In this area it may show satellite imagery laid over terrain rather than a 3D model of the monument.',
+    privacyLink: 'Google Privacy Policy (opens an external site)',
+    start: 'Start the flight',
+    decline: 'Not now',
+    loading: 'Loading Google Maps…',
+    failedTitle: 'The flight could not start',
+    failedBody:
+      'Google Maps did not load. The illustrative model and every chapter remain fully usable.',
+    retry: 'Try again',
+    close: 'Close the flight',
+    controlsLabel: 'Flight controls',
+    previous: 'Previous view',
+    next: 'Next view',
+    play: 'Play',
+    pause: 'Pause',
+    stopProgress: 'View {current} of {total}.',
+    stops: {
+      arrival: 'Approaching from the east.',
+      circuit: 'A full circle around the monument.',
+      overhead: 'Looking straight down.',
+      summit: 'A closer circle around the top.',
+      departure: 'Pulling back over the surrounding land.',
+    },
+    caption:
+      'The flight shows third-party aerial imagery supplied by Google. Its date and processing are Google’s. The camera path is a choice made for this project, not a historical route.',
+  },
   evidence: {
     legendTitle: 'How to read the labels',
     labels: {
@@ -347,6 +383,42 @@ const id: Dictionary = {
     openRead: 'Buka mode Baca',
     schematicNote: 'Skema tampak. Proporsi bersifat ilustratif, tidak diukur.',
     realmBandLabel: 'Zona {realm}',
+  },
+  flyover: {
+    open: 'Terbang di atas situs asli',
+    regionLabel: 'Penerbangan udara di atas situs, ditampilkan dengan Google Maps',
+    imageryLabel: 'Citra udara dari Google Maps — tidak dibuat atau diperiksa oleh proyek ini',
+    mapDescription:
+      'Tampilan udara situs Borobudur dari Google Maps. Kamera berpindah di antara lima sudut pandang. Semua bab tetap tersedia sebagai teks.',
+    consentTitle: 'Terbang di atas situs dengan Google Maps',
+    consentBody:
+      'Penerbangan ini digambar oleh Google Maps. Memulainya menghubungkan peramban Anda ke Google, yang menerima alamat IP Anda dan dapat memasang kuki. Tidak ada yang dikirim ke Google sebelum Anda memulai.',
+    coverageNote:
+      'Google menentukan apa yang tampil. Di wilayah ini mungkin hanya citra satelit di atas medan, bukan model 3D monumen.',
+    privacyLink: 'Kebijakan Privasi Google (membuka situs eksternal)',
+    start: 'Mulai penerbangan',
+    decline: 'Nanti saja',
+    loading: 'Memuat Google Maps…',
+    failedTitle: 'Penerbangan tidak dapat dimulai',
+    failedBody:
+      'Google Maps tidak termuat. Model ilustratif dan semua bab tetap dapat digunakan sepenuhnya.',
+    retry: 'Coba lagi',
+    close: 'Tutup penerbangan',
+    controlsLabel: 'Kontrol penerbangan',
+    previous: 'Pandangan sebelumnya',
+    next: 'Pandangan berikutnya',
+    play: 'Putar',
+    pause: 'Jeda',
+    stopProgress: 'Pandangan {current} dari {total}.',
+    stops: {
+      arrival: 'Mendekat dari arah timur.',
+      circuit: 'Satu putaran penuh mengelilingi monumen.',
+      overhead: 'Melihat lurus ke bawah.',
+      summit: 'Putaran lebih dekat di sekitar puncak.',
+      departure: 'Menjauh di atas lanskap sekitarnya.',
+    },
+    caption:
+      'Penerbangan ini menampilkan citra udara pihak ketiga dari Google. Tanggal dan pengolahannya ditentukan Google. Jalur kamera adalah pilihan proyek ini, bukan rute bersejarah.',
   },
   evidence: {
     legendTitle: 'Cara membaca label',

@@ -32,6 +32,8 @@ export type ExperienceState = {
   motion: MotionPolicy;
   sceneQuality: SceneQuality;
   sourceDrawerOpen: boolean;
+  /** The Google Maps flight covers the stage. Never restored from a link: it needs consent. */
+  flyoverOpen: boolean;
 };
 
 /** The subset of state that is shareable through deep links. */
@@ -51,6 +53,7 @@ export type ExperienceAction =
   | { type: 'SET_MOTION'; motion: MotionPolicy }
   | { type: 'SET_QUALITY'; quality: SceneQuality }
   | { type: 'SET_SOURCE_DRAWER'; open: boolean }
+  | { type: 'SET_FLYOVER'; open: boolean }
   | { type: 'RESTORE'; linkable: LinkableState };
 
 /** Allow-lists that come from the validated content pack. */
@@ -77,6 +80,7 @@ export function createInitialState(
     motion: 'reduced',
     sceneQuality: 'none',
     sourceDrawerOpen: false,
+    flyoverOpen: false,
   };
 }
 
@@ -127,6 +131,7 @@ export function createReducer(ids: ContentIds) {
           activeFeatureId: null,
           activeReliefId: null,
           sourceDrawerOpen: false,
+          flyoverOpen: false,
         };
       case 'CHANGE_ERA':
         if (!includes(ERA_IDS, action.era) || action.era === state.era) return state;
@@ -152,6 +157,7 @@ export function createReducer(ids: ContentIds) {
           activeFeatureId: null,
           activeReliefId: action.id,
           sourceDrawerOpen: false,
+          flyoverOpen: false,
         };
       case 'CLOSE_RELIEF':
         return state.activeReliefId === null ? state : { ...state, activeReliefId: null };
@@ -173,12 +179,16 @@ export function createReducer(ids: ContentIds) {
         return action.open === state.sourceDrawerOpen
           ? state
           : { ...state, sourceDrawerOpen: action.open };
+      case 'SET_FLYOVER':
+        return action.open === state.flyoverOpen ? state : { ...state, flyoverOpen: action.open };
       case 'RESTORE': {
         const next = normalizeLinkable(action.linkable, ids);
         const unchanged = (Object.keys(next) as (keyof LinkableState)[]).every(
           (key) => next[key] === state[key],
         );
-        return unchanged ? state : { ...state, ...next, sourceDrawerOpen: false };
+        return unchanged
+          ? state
+          : { ...state, ...next, sourceDrawerOpen: false, flyoverOpen: false };
       }
       default:
         return state;

@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Component, useRef, type ReactNode } from 'react';
+import { Component, useEffect, useRef, type ReactNode } from 'react';
 import type { ContentPack, Locale } from '@/content/types';
 import type { ExperienceState } from '@/features/experience/controller';
 import { readHref } from '@/features/experience/url-state';
@@ -14,6 +14,7 @@ import { skyToneFor } from '@/scene/atmosphere';
 import { highlightForFeature, highlightForRealm, type SceneHighlight } from '@/scene/monument-spec';
 import { waypointKeyFor, type WaypointKey } from '@/scene/waypoints';
 import { featureCallouts } from '@/features/architecture/callouts';
+import { isFlyoverConfigured } from '@/features/flyover/google-maps';
 import { MonumentSchematic } from './MonumentSchematic';
 
 const ExperienceCanvas = dynamic<ExperienceCanvasProps>(() => import('@/scene/ExperienceCanvas'), {
@@ -35,6 +36,8 @@ class SceneErrorBoundary extends Component<
     return this.state.failed ? null : this.props.children;
   }
 }
+
+const FlyoverStage = dynamic(() => import('@/features/flyover/FlyoverStage'), { ssr: false });
 
 export type SceneStatus = 'idle' | 'loading' | 'ready' | 'failed';
 
@@ -62,6 +65,7 @@ export function SceneStage({
   onQualityDrop,
   onSkipIntro,
   onHotspotActivate,
+  onFlyoverChange,
 }: {
   pack: ContentPack;
   locale: Locale;
@@ -84,9 +88,18 @@ export function SceneStage({
   onQualityDrop: (quality: RenderableQuality) => void;
   onSkipIntro: () => void;
   onHotspotActivate: (id: string) => void;
+  onFlyoverChange: (open: boolean) => void;
 }) {
   const t = getDictionary(locale);
   const hotspotLayer = useRef<HTMLDivElement>(null);
+  const flyoverTrigger = useRef<HTMLButtonElement>(null);
+  const flyoverWasOpen = useRef(false);
+  const flyoverOpen = isFlyoverConfigured && state.flyoverOpen;
+  // Closing the flight returns focus to the control that opened it.
+  useEffect(() => {
+    if (flyoverWasOpen.current && !flyoverOpen) flyoverTrigger.current?.focus();
+    flyoverWasOpen.current = flyoverOpen;
+  }, [flyoverOpen]);
   const treatment = sceneTreatment(state.chapter, state.era);
   const tone = skyToneFor(state.chapter, state.era, state.realm);
   const highlight: SceneHighlight =
@@ -120,117 +133,143 @@ export function SceneStage({
       aria-label={t.scene.regionLabel}
       data-testid="scene-stage"
       data-scene-status={status}
-      data-scene-view={showCanvas ? '3d' : 'diagram'}
+      data-scene-view={flyoverOpen ? 'flyover' : showCanvas ? '3d' : 'diagram'}
       className="flex flex-col lg:min-h-0"
     >
       <div
         data-tone={tone}
-        className="scene-backdrop relative isolate min-h-[42svh] flex-1 overflow-hidden lg:min-h-0"
+        className={`scene-backdrop relative isolate flex-1 overflow-hidden lg:min-h-0 ${
+          // The flight needs more room than the diagram on a phone.
+          flyoverOpen ? 'min-h-[76svh]' : 'min-h-[42svh]'
+        }`}
       >
-        <div
-          data-testid="scene-still"
-          aria-hidden={showCanvas}
-          className={`absolute inset-0 flex items-end justify-center px-6 pt-10 pb-16 transition-opacity duration-700 ${
-            showCanvas ? 'opacity-0' : 'opacity-100'
-          }`}
-        >
-          <MonumentSchematic
-            idPrefix="stage-still"
-            title={t.scene.stillLabel}
-            description={diagram?.alt[locale] ?? t.scene.schematicNote}
-            treatment={treatment}
-            highlight={highlight}
-            callouts={callouts}
-            className="h-full max-h-[70%] w-full max-w-3xl"
-          />
-        </div>
-
-        {canvasActive && state.sceneQuality !== 'none' && (
+        <div inert={flyoverOpen} className="contents">
           <div
-            role="img"
-            aria-label={model?.alt[locale] ?? t.scene.canvasDescription}
-            aria-hidden={!showCanvas}
-            data-testid="scene-canvas"
-            className={`absolute inset-0 transition-opacity duration-700 ${
-              showCanvas ? 'opacity-100' : 'opacity-0'
-            } ${state.mode === 'explore' && showCanvas ? 'touch-none' : 'pointer-events-none'}`}
+            data-testid="scene-still"
+            aria-hidden={showCanvas}
+            className={`absolute inset-0 flex items-end justify-center px-6 pt-10 pb-16 transition-opacity duration-700 ${
+              showCanvas ? 'opacity-0' : 'opacity-100'
+            }`}
           >
-            <SceneErrorBoundary key={attempt} onError={onFail}>
-              <ExperienceCanvas
-                waypointKey={waypointKey}
-                mode={state.mode}
-                motion={state.motion}
-                quality={state.sceneQuality}
-                treatment={treatment}
-                highlight={highlight}
-                tone={tone}
-                hotspots={hotspots}
-                hotspotLayer={hotspotLayer}
-                skipToken={skipToken}
-                onReady={onReady}
-                onArrive={onArrive}
-                onContextLost={onFail}
-                onQualityDrop={onQualityDrop}
-                onHotspotActivate={onHotspotActivate}
-              />
-            </SceneErrorBoundary>
+            <MonumentSchematic
+              idPrefix="stage-still"
+              title={t.scene.stillLabel}
+              description={diagram?.alt[locale] ?? t.scene.schematicNote}
+              treatment={treatment}
+              highlight={highlight}
+              callouts={callouts}
+              className="h-full max-h-[70%] w-full max-w-3xl"
+            />
           </div>
-        )}
 
-        {/* Real, focusable hotspot buttons are portalled here, outside the role="img" canvas. */}
-        <div
-          ref={hotspotLayer}
-          data-testid="scene-hotspots"
-          className={`pointer-events-none absolute inset-0 overflow-hidden ${showCanvas ? '' : 'hidden'}`}
-        />
-
-        {/* A brief veil marks the switch between drawing styles; it is not a depiction of time passing. */}
-        {state.chapter === 'centuries' && (
-          <div key={state.era} aria-hidden="true" className="era-veil absolute inset-0" />
-        )}
-
-        <div aria-hidden="true" className="stage-fade" />
-
-        <div className="pointer-events-none absolute inset-x-0 top-0 flex flex-wrap items-start justify-between gap-2 p-3 sm:p-4">
-          <p data-testid="illustrative-label" className="chip">
-            {t.common.illustrativeLabel}
-          </p>
-          {introPending && (
-            <button
-              type="button"
-              onClick={onSkipIntro}
-              className="btn-ghost pointer-events-auto bg-ink/70 backdrop-blur"
+          {canvasActive && state.sceneQuality !== 'none' && (
+            <div
+              role="img"
+              aria-label={model?.alt[locale] ?? t.scene.canvasDescription}
+              aria-hidden={!showCanvas}
+              data-testid="scene-canvas"
+              className={`absolute inset-0 transition-opacity duration-700 ${
+                showCanvas ? 'opacity-100' : 'opacity-0'
+              } ${state.mode === 'explore' && showCanvas ? 'touch-none' : 'pointer-events-none'}`}
             >
-              {t.hero.skipIntro}
-            </button>
-          )}
-        </div>
-
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-start gap-2 p-3 sm:p-4">
-          {status === 'idle' && (
-            <button
-              type="button"
-              onClick={onRequest}
-              className="btn-ghost pointer-events-auto bg-ink/70 backdrop-blur"
-            >
-              {t.scene.show3d}
-            </button>
-          )}
-          {status === 'loading' && (
-            <div className="bg-ink/80 pointer-events-auto flex max-w-md flex-wrap items-center gap-3 rounded-2xl border border-white/15 p-3 pl-4 text-sm backdrop-blur">
-              <p role="status" className="text-white">
-                {t.scene.loading}
-              </p>
-              <button type="button" onClick={onCancel} className="btn-ghost">
-                {t.scene.cancelLoading}
-              </button>
+              <SceneErrorBoundary key={attempt} onError={onFail}>
+                <ExperienceCanvas
+                  waypointKey={waypointKey}
+                  mode={state.mode}
+                  motion={state.motion}
+                  quality={state.sceneQuality}
+                  treatment={treatment}
+                  highlight={highlight}
+                  tone={tone}
+                  hotspots={hotspots}
+                  hotspotLayer={hotspotLayer}
+                  skipToken={skipToken}
+                  onReady={onReady}
+                  onArrive={onArrive}
+                  onContextLost={onFail}
+                  onQualityDrop={onQualityDrop}
+                  onHotspotActivate={onHotspotActivate}
+                />
+              </SceneErrorBoundary>
             </div>
           )}
-          {showCanvas && state.mode === 'explore' && <p className="chip">{t.scene.exploreHint}</p>}
-          {callouts.length > 0 && !showCanvas && (
-            <p className="chip">{t.architecture.calloutNote}</p>
+
+          {/* Real, focusable hotspot buttons are portalled here, outside the role="img" canvas. */}
+          <div
+            ref={hotspotLayer}
+            data-testid="scene-hotspots"
+            className={`pointer-events-none absolute inset-0 overflow-hidden ${showCanvas ? '' : 'hidden'}`}
+          />
+
+          {/* A brief veil marks the switch between drawing styles; it is not a depiction of time passing. */}
+          {state.chapter === 'centuries' && (
+            <div key={state.era} aria-hidden="true" className="era-veil absolute inset-0" />
           )}
+
+          <div aria-hidden="true" className="stage-fade" />
+
+          <div className="pointer-events-none absolute inset-x-0 top-0 flex flex-wrap items-start justify-between gap-2 p-3 sm:p-4">
+            <p data-testid="illustrative-label" className="chip">
+              {t.common.illustrativeLabel}
+            </p>
+            {introPending && (
+              <button
+                type="button"
+                onClick={onSkipIntro}
+                className="btn-ghost pointer-events-auto bg-ink/70 backdrop-blur"
+              >
+                {t.hero.skipIntro}
+              </button>
+            )}
+          </div>
+
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-start gap-2 p-3 sm:p-4">
+            {status === 'idle' && (
+              <button
+                type="button"
+                onClick={onRequest}
+                className="btn-ghost pointer-events-auto bg-ink/70 backdrop-blur"
+              >
+                {t.scene.show3d}
+              </button>
+            )}
+            {status === 'loading' && (
+              <div className="bg-ink/80 pointer-events-auto flex max-w-md flex-wrap items-center gap-3 rounded-2xl border border-white/15 p-3 pl-4 text-sm backdrop-blur">
+                <p role="status" className="text-white">
+                  {t.scene.loading}
+                </p>
+                <button type="button" onClick={onCancel} className="btn-ghost">
+                  {t.scene.cancelLoading}
+                </button>
+              </div>
+            )}
+            {showCanvas && state.mode === 'explore' && (
+              <p className="chip">{t.scene.exploreHint}</p>
+            )}
+            {callouts.length > 0 && !showCanvas && (
+              <p className="chip">{t.architecture.calloutNote}</p>
+            )}
+            {isFlyoverConfigured && status !== 'loading' && (
+              <button
+                ref={flyoverTrigger}
+                type="button"
+                onClick={() => onFlyoverChange(true)}
+                className="btn-ghost bg-ink/70 pointer-events-auto backdrop-blur"
+              >
+                {t.flyover.open}
+              </button>
+            )}
+          </div>
         </div>
+
+        {/* Last in the stack, so nothing of ours covers Google's logo and credits. */}
+        {flyoverOpen && (
+          <FlyoverStage
+            locale={locale}
+            motion={state.motion}
+            onClose={() => onFlyoverChange(false)}
+          />
+        )}
       </div>
 
       {status === 'failed' && (
